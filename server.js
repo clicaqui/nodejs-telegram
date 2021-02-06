@@ -1,7 +1,7 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const axios = require("axios");
 const fetch = require("node-fetch");
+const bodyParser = require('body-parser');
 
 const app = express();
 
@@ -13,8 +13,7 @@ app.use(
     extended: true,
   })
 );
-
-app.use(express.static('public'));
+//app.use(express.static('public'));
 function sendMessage(url, message, reply, res) {
     axios.post(url, { chat_id: message.chat.id,
         text: reply
@@ -28,7 +27,7 @@ function sendMessage(url, message, reply, res) {
 }
 app.post('/start_bot', (req, res) => {
   const { message } = req.body;
-  //console.log(message.text);
+  console.log(message.text);
   let reply = "Hi, find your passage on the Bible...";
   let myMessage = message.text.toLowerCase();
   if(myMessage.indexOf("hi") === 0){
@@ -40,14 +39,13 @@ app.post('/start_bot', (req, res) => {
     const passage = book + msg[2] + '.' + msg[3];
     fetch(`https://api.biblia.com/v1/bible/content/LEB.html?passage=${passage}&key=${process.env.BOOK_KEY}`)
       .then(result => {
-        //console.log(result);
+        console.log(result);
         reply = result + " - " + passage; 
-        sendMessage(telegram_url, message, reply, res);
       }).catch(err => {
-          reply = `Passage not found`;
-          sendMessage(telegram_url, message, reply, res);
+        reply = `Passage not found - ${err}`;
       });
     }
+    sendMessage(telegram_url, message, reply, res);
  //     return res.end();
 });
 
