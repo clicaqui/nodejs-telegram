@@ -19,14 +19,14 @@ function sendMessage(url, message, reply, res) {
         text: reply
     }).then(response => {
         console.log("Message posted");
-        //res.end("ok");
+        res.end("ok");
     }).catch(error =>{
         console.log(error);
     });
 }
 app.post('/start_bot', (req, res) => {
   const { message } = req.body;
-  console.log(message.text.toLowerCase().indexOf("hi") );
+  console.log(message.text );
   let reply = "Olá bem vindo ao Mensagens Biblicas";
   if(message.text.toLowerCase().indexOf("hi") !== -1){
       sendMessage(telegram_url,message,reply,res);
