@@ -19,12 +19,13 @@ app.use(express.static('public'));
 
 app.get('/', (req, res) => {
 
-  console.log(`Entrou pelo GET ${req}`);
+  console.log(`Entrou pelo GET ${req.bodyParser}`);
 });
 
 app.post('/', (req, res) => {
   const enteredGoal = req.body.goal;
-  console.log(`Entrou pelo POST ${req}`);
+
+  console.log(`Entrou pelo POST ${req.bodyParser}`);
   userGoal = enteredGoal;
   //res.redirect('/');
   res.redirect(url + API_KEY + `/sendMessage?chat_id=1067356804&text=${userGoal}`);
