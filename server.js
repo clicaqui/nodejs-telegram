@@ -27,10 +27,10 @@ function sendMessage(url, message, reply, res) {
 
 app.post('/start_bot', (req, res) => {
   const { message } = req.body;
+  console.log(message.text);
 
-  //console.log(myMessage);
   let reply = "Hi, find your passage on the Bible...";
-  if(myMessage.indexOf("hi") === 0){
+  if(message.text.toLowerCase().indexOf("hi") === 0){
     reply = "To start type: '/' )";
   } else if(message.text.toLowerCase().indexOf("/phrases") === 0){
     const msg = message.text.toLowerCase().split(" ");
