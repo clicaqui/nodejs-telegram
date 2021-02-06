@@ -27,6 +27,7 @@ function sendMessage(url, message, reply, res) {
 };
 
 app.post('/start_bot', (req, res) => {
+  console.log(req.body);
   const { message } = req.body;
     console.log(message);
     
