@@ -17,7 +17,16 @@ app.use(
 );
 
 //app.use(express.static('public'));
-
+function sendMessage(url, message, reply, res) {
+    axios.post(url, { chat_id: 1067356804,
+        text: reply
+    }).then(response => {
+        console.log("Message posted");
+        res.end("ok");
+    }).catch(error =>{
+        console.log(error);
+    });
+}
 app.post('/start_bot', (req, res) => {
   const { message } = req.body;
   console.log(message);
@@ -28,20 +37,8 @@ app.post('/start_bot', (req, res) => {
      // reply = "request not understood, please review and try again.";
       sendMessage(telegram_url,message,reply,res);
       return res.end();
-  //}
-  
+  //}  
 });
 
-const sendMessage = (url, message, reply, res) => {
-    axios.post(url, { chat_id: 1067356804,
-        text: reply
-    }).then(response => {
-        console.log("Message posted");
-        res.end("ok");
-    }).catch(error =>{
-        console.log(error);
-    });
-  }
-
 let port = process.env.PORT || 3000;
-app.listen(port, () => console.log("Telegram bot is listening on port 3000!"));
+app.listen(port, () => console.log("Telegram bot is listening on port " + this.address()));
