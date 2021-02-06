@@ -36,8 +36,8 @@ app.post('/start_bot', (req, res) => {
     let msg = message.text.toLowerCase().split(" ");
     const book = msg[1].charAt(0).toUpperCase() + msg[1].slice(1);
     const passage = book + msg[2] + '.' + msg[3];
-    console.log(passage);
-    const result = fetch(`https://api.biblia.com/v1/bible/content/LEB.html?passage=${passage}&key=${process.env.BOOK_KEY}`);
+    const result = await fetch(`https://api.biblia.com/v1/bible/content/LEB.html?passage=${passage}&key=${process.env.BOOK_KEY}`);
+    console.log(result);
     if (result){
       reply = result + " - " + passage;  
     } else {
