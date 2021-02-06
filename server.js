@@ -34,7 +34,8 @@ app.post('/start_bot', (req, res) => {
   if(message.text.toLowerCase().indexOf("hi") === 0){
     reply = "Olá você está no Mensagens Biblicas";
   } else if(message.text.toLowerCase().indexOf("/phrases") === 0){
-    msg = message.toCapitalize().split();
+    msg = message.text.replace(/^\w/, c => c.toUpperCase()).split();
+    console.log(msg);
     reply = "Você está no Phrases." + msg[1];
 
   }  
