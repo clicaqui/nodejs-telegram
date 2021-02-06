@@ -27,12 +27,12 @@ function sendMessage(url, message, reply, res) {
 }
 app.post('/start_bot', (req, res) => {
   const { message } = req.body;
-  console.log(message);
-  let reply = "Welcome to telegram weather bot";
+  //onsole.log(message);
+  let reply = "Olá bem vindo ao Mensagens Biblicas";
   if(message.text.toLowerCase().indexOf("hi") !== -1){
       sendMessage(telegram_url,message,reply,res);
   }else{
-      reply = "request not understood, please review and try again.";
+      reply = "Escolha um comando para ir adiante (Type '/').";
       sendMessage(telegram_url,message,reply,res);
       return res.end();
   }  
