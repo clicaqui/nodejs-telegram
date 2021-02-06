@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const axios = require("axios");
-const fetch = require("node-fetch");
+//const fetch = require("node-fetch");
 
 const app = express();
 const telegram_url = `https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`;
@@ -38,13 +38,12 @@ app.post('/start_bot', (req, res) => {
     const book = msg[1].charAt(0).toUpperCase() + msg[1].slice(1);
     const passage = book + msg[2] + "." + msg[3];
     
-    fetch(`https://api.biblia.com/v1/bible/content/LEB.html?passage=${passage}&key=${process.env.BOOK_KEY}`)
-    .then(result => {
-      //console.log(result);
+    /*fetch(`https://api.biblia.com/v1/bible/content/LEB.html?passage=${passage}&key=${process.env.BOOK_KEY}`).then(result => {
+      console.log(result);
       reply = result + " - " + passage; 
     }).catch(err => {
       reply = `Passage not found - ${err}`;
-    }); 
+    }); */
   } 
     sendMessage(telegram_url, message, reply, res); 
   
