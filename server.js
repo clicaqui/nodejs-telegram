@@ -47,7 +47,7 @@ app.post('/phrases', (req, res) => {
 });
 
 const sendMessage = (url, message, reply, res) => {
-    axios.post(url, { chat_id: message.from.id,
+    axios.post(url, { chat_id: message.chat.id,
         text: reply
     }).then(response => {
         console.log("Message posted");
