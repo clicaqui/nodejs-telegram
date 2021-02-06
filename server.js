@@ -27,9 +27,9 @@ function sendMessage(url, message, reply, res) {
 }
 app.post('/start_bot', (req, res) => {
   const { message } = req.body;
-  //console.log(message);
+  console.log(message);
   let reply = "Welcome to telegram weather bot";
-  if(message.text.toLowerCase().indexOf("hi") !== -1){
+  if(message.chat.text.toLowerCase().indexOf("hi") !== -1){
       sendMessage(telegram_url,message,reply,res);
   }else{
       reply = "request not understood, please review and try again.";
