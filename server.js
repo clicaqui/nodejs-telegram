@@ -7,7 +7,7 @@ const telegram_url = `https://api.telegram.org/bot${process.env.API_KEY}/sendMes
 
 app.use(express.json());
 app.use(
-  bodyParser.urlencoded({
+  express.urlencoded({
     extended: true,
   })
 );
