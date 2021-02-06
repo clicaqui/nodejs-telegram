@@ -12,7 +12,7 @@ app.use(
     extended: true,
   })
 );
-app.use(bodyParser.json({limit: '10mb'}));
+//app.use(bodyParser.json({limit: '10mb'}));
 //app.use(express.static('public'));
 function sendMessage(url, message, reply, res) {
     axios.post(url, { chat_id: message.chat.id,
@@ -28,7 +28,7 @@ function sendMessage(url, message, reply, res) {
 
 app.post('/start_bot', (req, res) => {
   const { message } = req.body;
-    console.log(message);
+    console.log(req.body);
     
   /* let reply = "Hi, find your passage on the Bible...";
   if(message.text.toLowerCase().indexOf("hi") === 0){
