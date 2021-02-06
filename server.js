@@ -42,7 +42,7 @@ app.get('/', (req, res) => {
 
 app.post('/', (req, res) => {
   const enteredGoal = req.body.goal;
-  console.log(JSON.parse(req.body));
+  console.log(req.body);
   userGoal = enteredGoal;
   //res.redirect('/');
   res.redirect(url + API_KEY + `/sendMessage?chat_id=1067356804&text=${userGoal}`);
