@@ -19,7 +19,7 @@ app.use(
 
 //app.use(express.static('public'));
 
-app.post('/start', (req, res) => {
+app.post('/', (req, res) => {
   const { message } = req.body;
   console.log(message);
   let reply = "Welcome to telegram weather bot";
