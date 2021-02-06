@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const axios = require("axios");
-//const fetch = require("node-fetch");
 
 const app = express();
 const telegram_url = `https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`;
@@ -13,7 +12,7 @@ app.use(
   })
 );
 //app.use(bodyParser.json({limit: '10mb'}));
-//app.use(express.static('public'));
+app.use(express.static('public'));
 function sendMessage(url, message, reply, res) {
     axios.post(url, { chat_id: message.chat.id,
         text: reply
@@ -27,9 +26,8 @@ function sendMessage(url, message, reply, res) {
 };
 
 app.post('/start_bot', (req, res) => {
-  console.log(req.body);
   const { message } = req.body;
-    console.log(message);
+  //console.log(message);
     
   let reply = "Hi, find your passage on the Bible...";
   if(message.text.toLowerCase().indexOf("hi") === 0){
@@ -46,7 +44,7 @@ app.post('/start_bot', (req, res) => {
       reply = `Passage not found - ${err}`;
     }); 
   } 
-    sendMessage(telegram_url, message, reply, res); 
+  sendMessage(telegram_url, message, reply, res); 
   
  //     return res.end();
 });
