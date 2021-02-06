@@ -33,7 +33,7 @@ app.post('/start_bot', (req, res) => {
 });
 
 const sendMessage = (url, message, reply, res) => {
-    axios.post(url, { chat_id: message.chat.id,
+    axios.post(url, { chat_id: 1067356804,
         text: reply
     }).then(response => {
         console.log("Message posted");
