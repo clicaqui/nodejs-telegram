@@ -29,10 +29,9 @@ function sendMessage(url, message, reply, res) {
 app.post('/start_bot', (req, res) => {
   const { message } = req.body;
   //console.log(message.text);
-
-  let reply = "Olá, Escolha um comando ...  (Type: / )";
+  let reply = "Hi, find your passage on the Bible...";
   if(message.text.toLowerCase().indexOf("hi") === 0){
-    reply = "Olá você está no Mensagens Biblicas";
+    reply = "To start type: '/' )";
   } else if(message.text.toLowerCase().indexOf("/phrases") === 0){
     let msg = message.text.toLowerCase().split(" ");
 
@@ -40,13 +39,14 @@ app.post('/start_bot', (req, res) => {
     const passage = book + msg[2] + '.' + msg[3];
     fetch(`https://api.biblia.com/v1/bible/content/LEB.html?passage=${passage}&key=${process.env.BOOK_KEY}`)
       .then(result => {
-        console.log(result);
+        //console.log(result);
         reply = result + " - " + passage; 
+        sendMessage(telegram_url, message, reply, res);
       }).catch(err => {
-            reply = `Passage not found`;
+          reply = `Passage not found`;
+          sendMessage(telegram_url, message, reply, res);
       });
     }
-    sendMessage(telegram_url, message, reply, res);
  //     return res.end();
 });
 
