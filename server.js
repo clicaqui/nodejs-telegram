@@ -35,7 +35,7 @@ app.post('/start_bot', (req, res) => {
   } else if(message.text.toLowerCase().indexOf("/phrases") === 0){
     let msg = message.text.toLowerCase().split(" ");
     const book = msg[1].charAt(0).toUpperCase() + msg[1].slice(1);
-    const passage = book + msg[2] + msg[3];
+    const passage = book + msg[2] + '.' + msg[3];
     console.log(passage);
     const result = fetch(`https://api.biblia.com/v1/bible/content/LEB.html?passage=${passage}&key=${process.env.BOOK_KEY}`);
     if (result){
