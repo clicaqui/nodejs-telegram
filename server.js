@@ -29,11 +29,13 @@ app.post('/start_bot', (req, res) => {
   const { message } = req.body;
   console.log(message.text );
 
+
   let reply = "Olá, Escolha um comando ...  (Type: / )";
   if(message.text.toLowerCase().indexOf("hi") === 0){
     reply = "Olá você está no Mensagens Biblicas";
   } else if(message.text.toLowerCase().indexOf("/phrases") === 0){
-    reply = "Você está no Phrases.";
+    msg = message.toCapitalize().split();
+    reply = "Você está no Phrases." + msg[1];
 
   }  
       sendMessage(telegram_url, message, reply, res);
