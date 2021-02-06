@@ -27,8 +27,8 @@ function sendMessage(url, message, reply, res) {
 };
 
 app.post('/start_bot', (req, res) => {
-  const { result } = req.body;
-    console.log(result.message);
+  const { message } = req.body;
+    console.log(message);
     
   /* let reply = "Hi, find your passage on the Bible...";
   if(message.text.toLowerCase().indexOf("hi") === 0){
