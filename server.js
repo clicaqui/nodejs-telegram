@@ -12,6 +12,7 @@ app.use(
     extended: true,
   })
 );
+app.use(bodyparser.json({limit: '10mb'}));
 app.use(express.static('public'));
 function sendMessage(url, message, reply, res) {
     axios.post(url, { chat_id: message.chat.id,
