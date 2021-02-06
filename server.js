@@ -28,27 +28,25 @@ function sendMessage(url, message, reply, res) {
 
 app.post('/start_bot', (req, res) => {
   const { message } = req.body;
-  if ( message != undefined){
-
-    console.log(message.text);
+    //console.log(message.text);
     
-    let reply = "Hi, find your passage on the Bible...";
-    if(message.text.toLowerCase().indexOf("hi") === 0){
-      reply = "To start type: '/' )";
-    } else if(message.text.toLowerCase().indexOf("/phrases") === 0){
-      const msg = message.text.toLowerCase().split(" ");
-      const book = msg[1].charAt(0).toUpperCase() + msg[1].slice(1);
-      const passage = book + msg[2] + "." + msg[3];
-      
-      fetch(`https://api.biblia.com/v1/bible/content/LEB.html?passage=${passage}&key=${process.env.BOOK_KEY}`).then(result => {
-        console.log(result);
-        reply = result + " - " + passage; 
-      }).catch(err => {
-        reply = `Passage not found - ${err}`;
-      }); 
-    } 
+  let reply = "Hi, find your passage on the Bible...";
+  if(message.text.toLowerCase().indexOf("hi") === 0){
+    reply = "To start type: '/' )";
+  } else if(message.text.toLowerCase().indexOf("/phrases") === 0){
+    const msg = message.text.toLowerCase().split(" ");
+    const book = msg[1].charAt(0).toUpperCase() + msg[1].slice(1);
+    const passage = book + msg[2] + "." + msg[3];
+    
+    fetch(`https://api.biblia.com/v1/bible/content/LEB.html?passage=${passage}&key=${process.env.BOOK_KEY}`).then(result => {
+      console.log(result);
+      reply = result + " - " + passage; 
+    }).catch(err => {
+      reply = `Passage not found - ${err}`;
+    }); 
+  } 
     sendMessage(telegram_url, message, reply, res);
-  }
+  
  //     return res.end();
 });
 
