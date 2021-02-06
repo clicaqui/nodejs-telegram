@@ -28,8 +28,8 @@ function sendMessage(url, message, reply, res) {
 app.post('/start_bot', (req, res) => {
   const { message } = req.body;
   console.log(message.text );
-  
-  let reply = "Escolha um comando para ir adiante (Type: '/' ).";
+
+  let reply = "Escolha um comando para continuar (Type: `/` )";
   if(message.text.toLowerCase().indexOf("hi") === 0){
     reply = "Olá você está no Mensagens Biblicas";
   } else if(message.text.toLowerCase().indexOf("/phrases") === 0){
@@ -40,9 +40,8 @@ app.post('/start_bot', (req, res) => {
     
 });
 
-app.post('/start_bot', (req, res) => {
+app.post('/phrases', (req, res) => {
   const { message } = req.body;
-
   let reply = "Você está no Phrases.";
 
   sendMessage(telegram_url, message, reply, res);
