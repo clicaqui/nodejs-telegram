@@ -30,10 +30,11 @@ app.post('/start_bot', (req, res) => {
   const { message } = req.body;
   //console.log(message.text);
   let reply = "Hi, find your passage on the Bible...";
-  if(message.text.toLowerCase().indexOf("hi") === 0){
+  let myMessage = message.text.toLowerCase();
+  if(myMessage.indexOf("hi") === 0){
     reply = "To start type: '/' )";
-  } else if(message.text.toLowerCase().indexOf("/phrases") === 0){
-    let msg = message.text.toLowerCase().split(" ");
+  } else if(myMessage.indexOf("/phrases") === 0){
+    let msg = myMessage.split(" ");
 
     const book = msg[1].charAt(0).toUpperCase() + msg[1].slice(1);
     const passage = book + msg[2] + '.' + msg[3];
