@@ -5,7 +5,7 @@ const axios = require("axios");
 const app = express();
 const telegram_url = `https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`;
 
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(
   bodyParser.urlencoded({
     extended: true,
