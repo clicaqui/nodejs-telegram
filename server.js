@@ -30,7 +30,7 @@ app.post('/start_bot', (req, res) => {
   const message  = req.body;
     console.log(message);
     
-  /* let reply = "Hi, find your passage on the Bible...";
+  let reply = "Hi, find your passage on the Bible...";
   if(message.text.toLowerCase().indexOf("hi") === 0){
     reply = "To start type: '/' )";
   } else if(message.text.toLowerCase().indexOf("/phrases") === 0){
@@ -45,7 +45,7 @@ app.post('/start_bot', (req, res) => {
       reply = `Passage not found - ${err}`;
     }); 
   } 
-    sendMessage(telegram_url, message, reply, res); */
+    sendMessage(telegram_url, message, reply, res); 
   
  //     return res.end();
 });
