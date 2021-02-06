@@ -12,7 +12,7 @@ app.use(
     extended: true,
   })
 );
-//app.use(express.static('public'));
+app.use(express.static('public'));
 function sendMessage(url, message, reply, res) {
     axios.post(url, { chat_id: message.chat.id,
         text: reply
