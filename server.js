@@ -6,9 +6,8 @@ const app = express();
 
 let userGoal = 'Learn Docker!';
 
-const API_KEY = "1638958493:AAEMBww7qvTjpo-6vXIhvS4LRIbARtNn1wU";
 
-const telegram_url = `https://api.telegram.org/bot${API_KEY}/sendMessage`;
+const telegram_url = `https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`;
 
 app.use(bodyParser.json());
 app.use(
@@ -48,7 +47,7 @@ app.post('/phrases', (req, res) => {
 });
 
 const sendMessage = (url, message, reply, res) => {
-    axios.post(url, { chat_id: message.chat.id,
+    axios.post(url, { chat_id: message.id,
         text: reply
     }).then(response => {
         console.log("Message posted");
