@@ -38,8 +38,9 @@ app.post('/start_bot', (req, res) => {
     const book = msg[1].charAt(0).toUpperCase() + msg[1].slice(1);
     const passage = book + msg[2] + "." + msg[3];
     
-    fetch(`https://api.biblia.com/v1/bible/content/LEB.html?passage=${passage}&key=${process.env.BOOK_KEY}`).then(result => {
-      console.log(result);
+    fetch(`https://api.biblia.com/v1/bible/content/LEB.html?passage=${passage}&key=${process.env.BOOK_KEY}`)
+    .then(result => {
+      //console.log(result);
       reply = result + " - " + passage; 
     }).catch(err => {
       reply = `Passage not found - ${err}`;
