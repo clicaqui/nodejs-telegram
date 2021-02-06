@@ -26,7 +26,7 @@ function sendMessage(url, message, reply, res) {
 }
 app.post('/start_bot', (req, res) => {
   const { message } = req.body;
-  console.log(essage.text.toLowerCase().indexOf("hi") );
+  console.log(message.text.toLowerCase().indexOf("hi") );
   let reply = "Olá bem vindo ao Mensagens Biblicas";
   if(message.text.toLowerCase().indexOf("hi") !== -1){
       sendMessage(telegram_url,message,reply,res);
