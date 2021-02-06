@@ -35,21 +35,17 @@ app.post('/start_bot', (req, res) => {
     reply = "Olá você está no Mensagens Biblicas";
   } else if(message.text.toLowerCase().indexOf("/phrases") === 0){
     let msg = message.text.toLowerCase().split(" ");
+
     const book = msg[1].charAt(0).toUpperCase() + msg[1].slice(1);
     const passage = book + msg[2] + '.' + msg[3];
     fetch(`https://api.biblia.com/v1/bible/content/LEB.html?passage=${passage}&key=${process.env.BOOK_KEY}`)
       .then(result => {
         console.log(result);
-        reply = result + " - " + passage;  
-
-      }).catch(
-          err => {
-            reply = `Passage not found `;
-          }
-      );
-      
+        reply = result + " - " + passage; 
+      }).catch(err => {
+            reply = `Passage not found`;
+      });
     }
-    
     sendMessage(telegram_url, message, reply, res);
  //     return res.end();
 });
