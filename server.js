@@ -12,14 +12,14 @@ const telegram_url = `https://api.telegram.org/bot${process.env.API_KEY}/sendMes
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
-    extended: false,
+    extended: true,
   })
 );
 
 //app.use(express.static('public'));
 
 app.post('/start_bot', (req, res) => {
-  const { message } = JSON.parse(req.body);
+  const { message } = req.body;
   console.log(message);
   let reply = "Welcome to telegram weather bot";
   //if(message.text.toLowerCase().indexOf("hi") !== -1){
