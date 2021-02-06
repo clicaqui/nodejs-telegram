@@ -19,7 +19,7 @@ app.use(
 
 //app.use(express.static('public'));
 
-app.post('/', (req, res) => {
+app.post('/start', (req, res) => {
   const { message } = req.body;
  // console.log(message);
   let reply = "Welcome to telegram weather bot";
@@ -30,6 +30,20 @@ app.post('/', (req, res) => {
       sendMessage(telegram_url,message,reply,res);
       return res.end();
   //}
+  
+});
+
+app.post('/phrases', (req, res) => {
+  const { message } = req.body;
+ // console.log(message);
+  let reply = "Welcome to telegram weather bot";
+  if(message.text.toLowerCase().indexOf("hi") !== -1){
+    //  sendMessage(telegram_url,message,reply,res);
+  //}else{
+      reply = "request not understood, please review and try again.";
+      sendMessage(telegram_url,message,reply,res);
+      return res.end();
+  }
   
 });
 
