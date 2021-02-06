@@ -20,8 +20,8 @@ app.use(
 //app.use(express.static('public'));
 
 app.post('/start', (req, res) => {
-
   const { message } = req.body;
+  console.log(message);
   let reply = "Welcome to telegram weather bot";
   if(message.text.toLowerCase().indexOf("hi") !== -1){
       sendMessage(telegram_url,message,reply,res);
@@ -45,4 +45,4 @@ const sendMessage = (url, message, reply, res) => {
   }
 
 let port = process.env.PORT || 3000;
-app.listen(port);
+app.listen(port, () => console.log("Telegram bot is listening on port 3000!"));
