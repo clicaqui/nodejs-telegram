@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const axios = require("axios");
 
 const app = express();
 
@@ -16,18 +17,12 @@ app.use(
   })
 );
 
-app.use(express.static('public'));
-
-app.get('/', (req, res) => {
-
-  console.log(`Entrou pelo GET ${JSON.stringify(req.params)}`);
-});
+//app.use(express.static('public'));
 
 app.post('/start', (req, res) => {
 
   const { message } = req.body;
   let reply = "Welcome to telegram weather bot";
-  let city_check = message.text.toLowerCase().indexOf('/');
   if(message.text.toLowerCase().indexOf("hi") !== -1){
       sendMessage(telegram_url,message,reply,res);
   }else{
