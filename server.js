@@ -19,7 +19,7 @@ function sendMessage(url, message, reply, res) {
         text: reply
     }).then(response => {
         console.log("Message posted");
-        res.end("ok");
+        //res.end("ok");
     }).catch(error =>{
         console.log(error);
     });
