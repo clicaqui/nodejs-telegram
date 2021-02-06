@@ -5,8 +5,6 @@ const axios = require("axios");
 const app = express();
 
 let userGoal = 'Learn Docker!';
-
-
 const telegram_url = `https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`;
 
 app.use(bodyParser.json());
@@ -22,7 +20,7 @@ function sendMessage(url, message, reply, res) {
         text: reply
     }).then(response => {
         console.log("Message posted");
-        res.end("ok");
+        //res.end("ok");
     }).catch(error =>{
         console.log(error);
     });
