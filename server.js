@@ -18,7 +18,7 @@ app.use(
 
 //app.use(express.static('public'));
 function sendMessage(url, message, reply, res) {
-    axios.post(url, { chat_id: 1067356804,
+    axios.post(url, { chat_id: message.chat.id,
         text: reply
     }).then(response => {
         console.log("Message posted");
@@ -29,7 +29,7 @@ function sendMessage(url, message, reply, res) {
 }
 app.post('/start_bot', (req, res) => {
   const { message } = req.body;
-  console.log(message);
+  //console.log(message);
   let reply = "Welcome to telegram weather bot";
   //if(message.text.toLowerCase().indexOf("hi") !== -1){
   //    sendMessage(telegram_url,message,reply,res);
