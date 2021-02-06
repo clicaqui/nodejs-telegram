@@ -23,18 +23,17 @@ function sendMessage(url, message, reply, res) {
         console.log(error);
         return;
     });
-}
+};
 
 app.post('/start_bot', (req, res) => {
   const { message } = req.body;
 
-  const myMessage = message.text.toLowerCase();
   //console.log(myMessage);
   let reply = "Hi, find your passage on the Bible...";
   if(myMessage.indexOf("hi") === 0){
     reply = "To start type: '/' )";
-  } else if(myMessage.indexOf("/phrases") === 0){
-    const msg = myMessage.split(" ");
+  } else if(message.text.toLowerCase().indexOf("/phrases") === 0){
+    const msg = message.text.toLowerCase().split(" ");
     const book = msg[1].charAt(0).toUpperCase() + msg[1].slice(1);
     const passage = book + msg[2] + "." + msg[3];
 
