@@ -37,13 +37,13 @@ app.post('/' + process.env.API_KEY, (req, res) => {
   }
   //let busca = {};
   if(myEditedMessage.toLowerCase().indexOf("hi") === 0){
-    reply = "To start type: '/' )";
+    reply = "To start type: '/' ";
   } else if(myEditedMessage.toLowerCase().indexOf("/phrases") === 0){
     passage = ["Daniel12.3","John1.1"];
     let rnd = generateRandomPhrase(passage.length, null);
     var busca  = getHolyPassage(passage[rnd], reply);  
     busca.then(resp => {
-        console.log(resp);
+       reply = resp;
     });
 
   } else if (myEditedMessage.toLowerCase().indexOf("") !== -1){  
