@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 //app.use(bodyParser.json({limit: '10mb'}));
 //app.use(express.static('public'));
 function sendMessage(url, message, reply, res) {
-  console.log(message);
+  console.log(reply);
    axios.post(url, { chat_id: message.chat.id,
         text: reply
     }).then(response => {
@@ -52,7 +52,7 @@ app.post('/' + process.env.API_KEY, (req, res) => {
   } 
   setTimeout(() => {
      sendMessage(telegram_url, message, reply, res); 
-  }, 5000 );
+  }, 3000 );
  //     return res.end();
 });
 
