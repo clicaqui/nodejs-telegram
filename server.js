@@ -47,7 +47,7 @@ app.post('/' + process.env.API_KEY, (req, res) => {
     busca.then(resp => {
       //console.log(resp.toString().replace('/[.*+\-?^${}()|[\]\\]/g', '\\$&'));
       reply = resp.toString().split('\\n\\t').join('');
-      reply = reply.replace('<p', '<pre').replaceAll('p>', 'pre>');
+      reply = reply.replace('<p', '<pre').replace('p>', 'pre>');
        sendMessage(telegram_url, message, reply, res); 
     });
 
