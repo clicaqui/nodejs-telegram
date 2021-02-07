@@ -53,8 +53,8 @@ app.post('/' + process.env.API_KEY, (req, res) => {
     const msg = myEditedMessage.toLowerCase().split(" ");
     console.log(msg.length);
       if (msg.length = 3) {
-        const book = msg[1].charAt(0).toUpperCase() + msg[1].slice(1);
-        passage = book + msg[2] + "." + msg[3];
+        const book = msg[0].charAt(0).toUpperCase() + msg[0].slice(1);
+        passage = book + msg[1] + "." + msg[2];
         var busca =  getHolyPassage(passage, reply);  
         busca.then(resp => {
           reply = resp;
