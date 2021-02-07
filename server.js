@@ -73,7 +73,7 @@ const generateRandomPhrase = (max, exclude) => {
 
 const getHolyPassage = async (passage,reply) => {
 
-  const resposta = {};
+  let resposta = {};
  try {
      resposta = await axios.get(`https://api.biblia.com/v1/bible/content/LEB.html?passage=${passage}&key=${process.env.BOOK_KEY}`);
   } catch (err) {
