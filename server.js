@@ -26,7 +26,7 @@ function sendMessage(url, message, reply, res) {
     });
 };
 
-app.post('/start_bot/' + process.env.API_KEY, (req, res) => {
+app.post('/start_bot/', (req, res) => {
   const { message } = req.body;
   console.log(message);
   
