@@ -49,6 +49,7 @@ app.post('/' + process.env.API_KEY, (req, res) => {
     busca.then(resp => {
       reply = resp.toString();
       reply = reply.replace(/\\\\n\\\\t/g, '');
+      reply = reply.replace(/\<br/g, '');
       reply = reply.replace(/\<p/g, '<pre').replace(/p\>/g, 'pre>');
        sendMessage(telegram_url, message, reply, res); 
     });
@@ -63,6 +64,7 @@ app.post('/' + process.env.API_KEY, (req, res) => {
         busca.then(resp => {
           reply = resp.toString();
           reply = reply.replace(/\\\\n\\\\t/g, '');
+          reply = reply.replace(/\<br/g, '');
           reply = reply.replace(/\<p/g, '<pre').replace(/p\>/g, 'pre>');
 
           sendMessage(telegram_url, message, reply, res); 
