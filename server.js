@@ -31,7 +31,7 @@ app.post('/' + process.env.API_KEY, (req, res) => {
   let reply = "Hi, find your passage on the Bible...";
   let myEditedMessage = Object.keys(req.body)[1].text;
   if (myEditedMessage == undefined) {
-    myEditedMessage = "john 1 1";
+    myEditedMessage = {text: "john 1 1", chat:{id: 1067356804}};
   }
 
   if(myEditedMessage.toLowerCase().indexOf("hi") === 0){
