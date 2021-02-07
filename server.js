@@ -54,7 +54,7 @@ app.post('/' + process.env.API_KEY, (req, res) => {
 
   } else if (myEditedMessage.toLowerCase().indexOf("") !== -1){  
     const msg = myEditedMessage.toLowerCase().split(" ");
-    console.log(msg.length);
+    //console.log(msg.length);
       if (msg.length == 3) {
         const book = msg[0].charAt(0).toUpperCase() + msg[0].slice(1);
         passage = book + msg[1] + "." + msg[2];
@@ -71,7 +71,7 @@ app.post('/' + process.env.API_KEY, (req, res) => {
  // setTimeout(() => {
   //   sendMessage(telegram_url, message, reply, res); 
   //}, 4000 );
- //     return res.end();
+    return res.end();
 });
 
 let port = process.env.PORT || 3000;
