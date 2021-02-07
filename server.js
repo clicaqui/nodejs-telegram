@@ -47,8 +47,7 @@ app.post('/' + process.env.API_KEY, (req, res) => {
     const book = msg[1].charAt(0).toUpperCase() + msg[1].slice(1);
     passage = book + msg[2] + "." + msg[3];
     
-    const { Promisse } =  getHolyPassage(passage, reply);  
-    reply = Promisse.toString();
+    reply =  getHolyPassage(passage, reply);  
 
   } 
   setTimeout(() => {
@@ -73,13 +72,13 @@ const generateRandomPhrase = (max, exclude) => {
 const getHolyPassage = async (passage,reply) => {
 
  try {
-    const response = await axios.get(`https://api.biblia.com/v1/bible/content/LEB.html?passage=${passage}&key=${process.env.BOOK_KEY}`);
+    const { response } = await axios.get(`https://api.biblia.com/v1/bible/content/LEB.html?passage=${passage}&key=${process.env.BOOK_KEY}`);
     //console.log(response.data);
     reply = response.data + " <br/><p>" + passage + "</p>";
   } catch (err) {
     console.error(err);
     reply = `Passage not found - ${err}`;
   }
-  return Promise.resolve( reply );
+  return reply ;
 }
 
