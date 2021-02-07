@@ -24,10 +24,10 @@ function sendMessage(url, message, reply, res) {
 };
 
 app.post('/' + process.env.API_KEY, (req, res) => {
-  console.log(req.body);
+  //console.log(req.body);
   //try{req.body = JSON.parse(Object.keys(req.body)[0])}catch(err){req.body = req.body}
-  const { message } = req.body;
-  console.log(Object.keys(req.body)[0]);
+  const { message } = Object.keys(req.body);
+  console.log(message.text);
   
     
   let reply = "Hi, find your passage on the Bible...";
