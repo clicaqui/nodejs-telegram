@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const axios = require("axios");
+const { response } = require('express');
 
 const telegram_url = `https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`;
 
@@ -73,13 +74,18 @@ const generateRandomPhrase = (max, exclude) => {
 const getHolyPassage = async (passage,reply) => {
 
  try {
-    await axios.get(`https://api.biblia.com/v1/bible/content/LEB.html?passage=${passage}&key=${process.env.BOOK_KEY}`).then(result => {
-       reply = result.data + " <br/><p>" + passage + "</p>";
-    });
+    const response = await axios.get(`https://api.biblia.com/v1/bible/content/LEB.html?passage=${passage}&key=${process.env.BOOK_KEY}`);
   } catch (err) {
     console.error(err);
-     reply = `Passage not found - ${err}`;
   }
-  return reply;
+  
+  return response.then(function(data) {
+    if (!data.ok) {
+      reply = `Passage not found - ${response.err}`;
+    }else {
+      reply = response.data + " <br/><p>" + passage + "</p>";
+    }
+    return reply;
+  });
 }
 
