@@ -79,12 +79,13 @@ const getHolyPassage = async (passage,reply) => {
   } catch (err) {
     console.error(err);
   }
-  console.log(resposta);
+  //console.log(resposta);
+  const retorno = resposta.json();
 
-  if (!resposta.ok) {
+  if (!retorno.status==200) {
     reply = `Passage not found `;
   }else {
-    reply = resposta.data + " <br/><p>" + passage + "</p>";
+    reply = retorno.data + " <br/><p>" + passage + "</p>";
   }
   return reply;
 
