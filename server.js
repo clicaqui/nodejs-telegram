@@ -35,7 +35,7 @@ app.post('/' + process.env.API_KEY, (req, res) => {
   if (myEditedMessage == undefined) {
     myEditedMessage = {text: "john 1 1", chat:{id: 1067356804}};
   }
-  //let busca = {};
+  let busca = {};
   if(myEditedMessage.toLowerCase().indexOf("hi") === 0){
     reply = "To start type: '/' )";
   } else if(myEditedMessage.toLowerCase().indexOf("/phrases") === 0){
