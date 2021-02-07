@@ -7,17 +7,14 @@ const telegram_url = `https://api.telegram.org/bot${process.env.API_KEY}/sendMes
 
 const app = express();
 
-app.use(bodyParser.urlencoded({extended: false})); 
-app.use(bodyParser.json({ type: 'application/*+json' }));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(bodyParser());
 
-
-app.use((req, res, next) => {
-  res.setHeader('Content-Type', 'application/json');
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "POST, PATCH, PUT"
-  );
-  next();
+app.all('/*', function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Content-Type,accept,access_token,X-Requested-With');
+    next();
 });
 
 //app.use(bodyParser.json({limit: '10mb'}));
