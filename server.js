@@ -6,7 +6,7 @@ const telegram_url = `https://api.telegram.org/bot${process.env.API_KEY}/sendMes
 
 const app = express();
 
-app.use(bodyParser.urlencoded({extended: true,})); 
+app.use(bodyParser.urlencoded({extended: false})); 
 app.use(bodyParser.json({ type: 'text/*+json' }));
 
 //app.use(bodyParser.json({limit: '10mb'}));
