@@ -29,7 +29,7 @@ app.post('/' + process.env.API_KEY, (req, res) => {
   console.log(Object.keys(req.body)[1].text);
 
   let reply = "Hi, find your passage on the Bible...";
-  const myEditedMessage = message.text;
+  const myEditedMessage = Object.keys(req.body)[1].text;
   if (myEditedMessage == undefined) {
     myEditedMessage = "john 1 1";
   }
