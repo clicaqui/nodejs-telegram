@@ -27,8 +27,8 @@ function sendMessage(url, message, reply, res) {
 };
 
 app.post('/start_bot/' + process.env.API_KEY, (req, res) => {
-  let { message } = req.body;
-  //console.log(message);
+  const { message } = req.body;
+  console.log(message);
   
     
   let reply = "Hi, find your passage on the Bible...";
