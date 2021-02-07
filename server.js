@@ -41,8 +41,8 @@ app.post('/' + process.env.API_KEY, (req, res) => {
   } else if(myEditedMessage.toLowerCase().indexOf("/phrases") === 0){
     passage = ["Daniel12.3","John1.1"];
     let rnd = generateRandomPhrase(passage.length, null);
-    const { busca } = getHolyPassage(passage[rnd], reply);  
-    console.log(busca);
+    const  busca  = getHolyPassage(passage[rnd], reply);  
+    console.log(busca.body);
 
   } else if (myEditedMessage.toLowerCase().indexOf("") !== -1){  
     const msg = myEditedMessage.toLowerCase().split(" ");
