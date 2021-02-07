@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const axios = require("axios");
 
-const telegram_url = `https://api.telegram.org/bot${process.env.API_KEY}/sendMessage?parse_mode=html`;
+const telegram_url = `https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`;
 
 const app = express();
 
@@ -52,6 +52,16 @@ app.post('/' + process.env.API_KEY, (req, res) => {
 
 let port = process.env.PORT || 3000;
 app.listen(port, () => console.log("Telegram bot is listening on port 3000"));
+const generateRandomPhrase = (min, max, exclude) => {
+  max = Math.ceil(max);
+  min = Math.floor(0);
+  const rand = Math.floor(Math.random() * (max - min)) + min;
+  if (rand === exclude){
+      return generateGuessNumber(min, max, exclude);
+  } else {
+      return rand;
+  }
+}
 
 function getHolyPassage(passage) {
   let reply;
