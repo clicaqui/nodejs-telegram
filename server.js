@@ -9,8 +9,8 @@ app.use(bodyParser.urlencoded({
   extended: false,
 })
 ); 
-app.use(bodyParser.json({ type: 'application/*+json' }));
-
+//app.use(bodyParser.json({ type: 'application/*+json' }));
+app.use(express.bodyParser());
 
 //app.use(bodyParser.json({limit: '10mb'}));
 //app.use(express.static('public'));
