@@ -51,14 +51,15 @@ app.post('/' + process.env.API_KEY, (req, res) => {
       if (msg.length > 3) {
         const book = msg[1].charAt(0).toUpperCase() + msg[1].slice(1);
         passage = book + msg[2] + "." + msg[3];
-        
         var busca =  getHolyPassage(passage, reply);  
-        console.log(busca);
+        busca.then(resp => {
+          reply = resp;
+       });
       }
   } 
-  setTimeout(() => {
+  //setTimeout(() => {
      sendMessage(telegram_url, message, reply, res); 
-  }, 4000 );
+ // }, 4000 );
  //     return res.end();
 });
 
