@@ -39,14 +39,14 @@ app.post('/' + process.env.API_KEY, (req, res) => {
     sendMessage(telegram_url, message, reply, res); 
   } else if(myEditedMessage.toLowerCase().indexOf("/oldtestament") === 0){
     reply = "The old testament books are ";
-    for(const item in OLDBOOKS){
-      reply += item + " "
+    for(var item in OLDBOOKS){
+      reply += item.value + " ";
     }
     sendMessage(telegram_url, message, reply, res);  
   } else if(myEditedMessage.toLowerCase().indexOf("/newtestament") === 0){
      reply = "The new testament books are ";
-    for(const item in NEWBOOKS){
-      reply += item + " "
+    for(var item in NEWBOOKS){
+      reply += item.value + " ";
     }
     sendMessage(telegram_url, message, reply, res);  
   } else if(myEditedMessage.toLowerCase().indexOf("/phrases") === 0){
@@ -119,5 +119,5 @@ const getHolyPassage = async (passage,reply) => {
   return reply;
 }
 const OLDBOOKS = ["Genesis" , "Exodus", "Leviticus", "Numbers", "Deuteronomy", "Joshua", "Judges", "Samuel", "Kings", "Chronicles", "Nehemiah", "Job", "Psalm", "Proverbs", "Ecclesiastes", "Isaiah", "Jeremiah", "Ezekiel", "Daniel", "Hosea", "Joel", "Amos", "Jonah", "Naum","Micah", "Habakkuk", "Zephaniah", "Haggai", "Malachi"];
-const NEWBOOKD = ["Matthew", "Mark", "Luke", "John", "Acts", "Romans", "Corinthians", "Galatians", "Ephesians", "Philippians", "Colossians", "Thessalonians", "Timothy", "Titus", "Hebrews" , "James", "Peter", "Jude", "Revelation"];
+const NEWBOOKS = ["Matthew", "Mark", "Luke", "John", "Acts", "Romans", "Corinthians", "Galatians", "Ephesians", "Philippians", "Colossians", "Thessalonians", "Timothy", "Titus", "Hebrews" , "James", "Peter", "Jude", "Revelation"];
 const RANDOM_PASSAGES = ["Daniel12.3","John1.1","Isaiah57.18"];
