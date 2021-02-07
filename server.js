@@ -84,5 +84,6 @@ const getHolyPassage = async (passage,reply) => {
   } catch (err) {
     console.error(err);
   }
+  return reply;
 }
 
