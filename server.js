@@ -41,8 +41,8 @@ app.post('/' + process.env.API_KEY, (req, res) => {
     let rnd = generateRandomPhrase(passage.length, null);
     var busca  = getHolyPassage(passage[rnd], reply);  
     busca.then(resp => {
-      reply = resp.toString();
-      reply = reply.replace(/\\\\n\\\\t/g, '');
+      reply = resp;
+      //reply = reply.replace(/\\\\n\\\\t/g, '');
       //reply = reply.replace(/\<br/g, '');
       //reply = reply.replace(/\<p/g, '<pre').replace(/p\>/g, 'pre>');
        sendMessage(telegram_url, message, reply, res); 
@@ -56,8 +56,8 @@ app.post('/' + process.env.API_KEY, (req, res) => {
         passage = book + msg[1] + "." + msg[2];
         var busca =  getHolyPassage(passage, reply);  
         busca.then(resp => {
-          reply = resp.toString();
-          reply = reply.replace(/\\\\n\\\\t/g, '');
+          reply = resp;
+          //reply = reply.replace(/\\\\n\\\\t/g, '');
           //reply = reply.replace(/\<br/g, '');
           //reply = reply.replace(/\<p/g, '<pre').replace(/p\>/g, 'pre>');
 
@@ -87,7 +87,7 @@ const getHolyPassage = async (passage,reply) => {
          if (!retorno.status==200) {
            reply = `Passage not found `;
          }else {
-           reply = retorno.data + " <br/><p>" + passage + "</p>";
+           reply = retorno.data + " " + passage ;
          }
     });
   } catch (err) {
