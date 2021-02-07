@@ -37,12 +37,14 @@ app.post('/' + process.env.API_KEY, (req, res) => {
     myEditedMessage.toLowerCase().indexOf("/help") === 0 ){
     reply = "To start type: '/find john 3 26' ";
     sendMessage(telegram_url, message, reply, res); 
-  } else if(myEditedMessage.toLowerCase().indexOf("/oldbooks")){
+  } else if(myEditedMessage.toLowerCase().indexOf("/oldtestament") === 0){
+    reply = "The old testament books are ";
     for(const item in OLDBOOKS){
       reply += item + " "
     }
     sendMessage(telegram_url, message, reply, res);  
-  } else if(myEditedMessage.toLowerCase().indexOf("/newbooks")){
+  } else if(myEditedMessage.toLowerCase().indexOf("/newtestament") === 0){
+     reply = "The new testament books are ";
     for(const item in NEWBOOKS){
       reply += item + " "
     }
