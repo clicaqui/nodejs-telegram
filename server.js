@@ -1,13 +1,13 @@
 const express = require('express');
 const app = express();
-//const bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 const axios = require("axios");
 
 const telegram_url = `https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`;
 
-app.use(express.json());
+app.use(bodyParser.json());
 
-app.use(express.urlencoded({
+app.use(bodyParser.urlencoded({
     extended: true,
   })
 );
@@ -26,7 +26,7 @@ function sendMessage(url, message, reply, res) {
     });
 };
 
-app.post('/start_bot', (req, res) => {
+app.post('/start_bot/' + process.env.API_KEY, (req, res) => {
   let { message } = req.body;
   //console.log(message);
   
