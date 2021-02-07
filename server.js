@@ -24,9 +24,9 @@ function sendMessage(url, message, reply, res) {
 };
 
 app.post('/' + process.env.API_KEY, (req, res) => {
-  console.log(Object(req.body));
+  //console.log(Object(req.body));
   const { message } =  req.body;
-  //console.log(message.text);
+  console.log(Object.keys(req.body)[1]);
 
   let reply = "Hi, find your passage on the Bible...";
   const myEditedMessage = Object.keys(req.body)[1].text.toString();
