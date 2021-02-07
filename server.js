@@ -37,15 +37,15 @@ app.post('/' + process.env.API_KEY, (req, res) => {
     myEditedMessage = {text: "john 1 1", chat:{id: 1067356804}};
   }
   //let busca = {};
-  if(myEditedMessage.toLowerCase().indexOf("hi") === 0){
-    reply = "To start type: '/' ";
+  if(myEditedMessage.toLowerCase().indexOf("help") === 0){
+    reply = "To start type: 'Book Charter verso (john 3 26)' ";
     sendMessage(telegram_url, message, reply, res); 
   } else if(myEditedMessage.toLowerCase().indexOf("/phrases") === 0){
     passage = ["Daniel12.3","John1.1"];
     let rnd = generateRandomPhrase(passage.length, null);
     var busca  = getHolyPassage(passage[rnd], reply);  
     busca.then(resp => {
-       reply = resp;
+      reply = resp.replace('\\n\\t','');
        sendMessage(telegram_url, message, reply, res); 
     });
 
@@ -57,7 +57,7 @@ app.post('/' + process.env.API_KEY, (req, res) => {
         passage = book + msg[1] + "." + msg[2];
         var busca =  getHolyPassage(passage, reply);  
         busca.then(resp => {
-          reply = resp;
+          reply = resp.replace('\\n\\t','');
           sendMessage(telegram_url, message, reply, res); 
        });
       }
