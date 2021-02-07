@@ -31,7 +31,7 @@ app.post('/' + process.env.API_KEY, (req, res) => {
    let reply = "Hi, find your passage on the Bible...";
    let passage;
    let myEditedMessage = message.text;
-   console.log(myEditedMessage);
+   //console.log(myEditedMessage);
 
   if(myEditedMessage.toLowerCase().indexOf("/start") === 0 || 
     myEditedMessage.toLowerCase().indexOf("/help") === 0 ){
@@ -40,7 +40,7 @@ app.post('/' + process.env.API_KEY, (req, res) => {
   } else if(myEditedMessage.toLowerCase().indexOf("/oldtestament") === 0){
     reply = "The old testament books are ";
     for(var item in OLDBOOKS){
-      console.log(item);
+      //console.log(item);
       reply += OLDBOOKS[item] + " ";
     }
     sendMessage(telegram_url, message, reply, res);  
@@ -69,11 +69,11 @@ app.post('/' + process.env.API_KEY, (req, res) => {
     let book;
     console.log(OLDBOOKS.map(bk => bk.toLowerCase()).includes(msg[1]) );
     console.log( NEWBOOKS.map(bk => bk.toLowerCase()).includes(msg[1]));
-      if (msg.length == 4 && (OLDBOOKS.map(bk => bk.toLowerCase()).includes(msg[1]) ||
+      if (msg.length == 4 && !isNaN(msg[2]) && !isNaN(msg[3]) && (OLDBOOKS.map(bk => bk.toLowerCase()).includes(msg[1]) ||
          NEWBOOKS.map(bk => bk.toLowerCase()).includes(msg[1]))) {
          book = msg[1].charAt(0).toUpperCase() + msg[1].slice(1);
         passage = book + msg[2] + "." + msg[3];
-       } else if (msg.length > 4 && (OLDBOOKS.map(bk => bk.toLowerCase()).includes(msg[2]) ||
+       } else if (msg.length > 4 && !isNaN(msg[3]) && !isNaN(msg[4]) && (OLDBOOKS.map(bk => bk.toLowerCase()).includes(msg[2]) ||
            NEWBOOKS.map(bk => bk.toLowerCase()).includes(msg[2]))){
          book = msg[2].charAt(0).toUpperCase() + msg[2].slice(1);
         passage = msg[1] + book + msg[3] + "." + msg[4];
