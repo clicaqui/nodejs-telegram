@@ -28,7 +28,7 @@ function sendMessage(url, message, reply, res) {
 
 app.post('/' + process.env.API_KEY, (req, res) => {
    const { message } =  req.body;
-  console.log(message);
+  //console.log(message);
 
   let reply = "Hi, find your passage on the Bible...";
   let passage;
@@ -48,7 +48,7 @@ app.post('/' + process.env.API_KEY, (req, res) => {
       reply = resp.toString();
       reply = reply.replace(/\w+?[\\n\\t]/g, '');
      // console.log(reply);
-      reply = reply.replace(/\w+?[<p]/g, '<pre').replace(/\w+?[p>]/g, 'pre>');
+      reply = reply.replace(/\w+?\<p/g, '<pre').replace(/\w+?[/\p>]/g, '\pre>');
        sendMessage(telegram_url, message, reply, res); 
     });
 
