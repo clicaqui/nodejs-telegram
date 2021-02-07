@@ -1,13 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const axios = require("axios");
-const { response } = require('express');
 
 const telegram_url = `https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`;
 
 const app = express();
 
-app.use(bodyParser.urlencoded({extended: true})); 
+app.use(bodyParser.urlencoded({extended: false})); 
 app.use(bodyParser.json());
 
 //app.use(bodyParser.json({limit: '10mb'}));
@@ -31,9 +30,6 @@ app.post('/' + process.env.API_KEY, (req, res) => {
    let reply = "Hi, find your passage on the Bible...";
    let passage;
    let myEditedMessage = message.text;
-   if (myEditedMessage == undefined) {
-     myEditedMessage = {text: "john 1 1", chat:{id: 1067356804}};
-    }
     //console.log(myEditedMessage);
 
   if(myEditedMessage.toLowerCase().indexOf("/start") === 0 || 
@@ -86,7 +82,6 @@ const generateRandomPhrase = (max, exclude) => {
 }
 
 const getHolyPassage = async (passage,reply) => {
-
  try {
     await axios.get(`https://api.biblia.com/v1/bible/content/LEB.txt.txt?passage=${passage}&key=${process.env.BOOK_KEY}`).then(function (retorno) { 
          if (!retorno.status==200) {
