@@ -27,7 +27,7 @@ function sendMessage(url, message, reply, res) {
 
 app.post('/' + process.env.API_KEY, (req, res) => {
   console.log(req.body);
-  const { message:any } = req.body;
+  const { message } = console.log(req.body);
   console.log(message);
   
     
