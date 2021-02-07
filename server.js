@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({
 
 //app.use(bodyParser.json({limit: '10mb'}));
 app.use(express.static('public'));
-function sendMessage(url, message, reply, res) {
+const sendMessage = (url, message, reply, res) => {
     axios.post(url, { chat_id: message.chat.id,
         text: reply
     }).then(response => {
@@ -26,7 +26,7 @@ function sendMessage(url, message, reply, res) {
     });
 };
 
-app.post('/start_bot', (req, res) => {
+app.post('/start_bot', process.env.API_KEY, (req, res) => {
   const { message } = req.body;
   console.log(message);
   
