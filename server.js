@@ -35,14 +35,16 @@ app.post('/' + process.env.API_KEY, (req, res) => {
   if (myEditedMessage == undefined) {
     myEditedMessage = {text: "john 1 1", chat:{id: 1067356804}};
   }
-  let busca = {};
+  //let busca = {};
   if(myEditedMessage.toLowerCase().indexOf("hi") === 0){
     reply = "To start type: '/' )";
   } else if(myEditedMessage.toLowerCase().indexOf("/phrases") === 0){
     passage = ["Daniel12.3","John1.1"];
     let rnd = generateRandomPhrase(passage.length, null);
-    const  busca  = getHolyPassage(passage[rnd], reply);  
-    console.log(busca.body);
+    var busca  = getHolyPassage(passage[rnd], reply);  
+    busca.then(resp => {
+        console.log(resp);
+    });
 
   } else if (myEditedMessage.toLowerCase().indexOf("") !== -1){  
     const msg = myEditedMessage.toLowerCase().split(" ");
@@ -50,7 +52,7 @@ app.post('/' + process.env.API_KEY, (req, res) => {
         const book = msg[1].charAt(0).toUpperCase() + msg[1].slice(1);
         passage = book + msg[2] + "." + msg[3];
         
-        const { busca } =  getHolyPassage(passage, reply);  
+        var busca =  getHolyPassage(passage, reply);  
         console.log(busca);
       }
   } 
