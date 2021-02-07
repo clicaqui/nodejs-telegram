@@ -73,21 +73,16 @@ const generateRandomPhrase = (max, exclude) => {
 
 const getHolyPassage = async (passage,reply) => {
 
-  let resposta = {};
  try {
-     resposta = await axios.get(`https://api.biblia.com/v1/bible/content/LEB.html?passage=${passage}&key=${process.env.BOOK_KEY}`);
+    await axios.get(`https://api.biblia.com/v1/bible/content/LEB.html?passage=${passage}&key=${process.env.BOOK_KEY}`).then(function (retorno) { 
+         if (!retorno.status==200) {
+           reply = `Passage not found `;
+         }else {
+           reply = retorno.data + " <br/><p>" + passage + "</p>";
+         }
+    });
   } catch (err) {
     console.error(err);
   }
-  //console.log(resposta);
-  const retorno = resposta.json();
-
-  if (!retorno.status==200) {
-    reply = `Passage not found `;
-  }else {
-    reply = retorno.data + " <br/><p>" + passage + "</p>";
-  }
-  return reply;
-
 }
 
