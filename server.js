@@ -9,6 +9,14 @@ const app = express();
 app.use(bodyParser.urlencoded({extended: false})); 
 app.use(bodyParser.json());
 
+app.use((req, res, next) => {
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "POST, PATCH, PUT"
+  );
+  next();
+});
+
 //app.use(bodyParser.json({limit: '10mb'}));
 //app.use(express.static('public'));
 function sendMessage(url, message, reply, res) {
