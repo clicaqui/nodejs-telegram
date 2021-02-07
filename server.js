@@ -14,10 +14,11 @@ app.use(bodyParser.json());
 //app.use(express.static('public'));
 function sendMessage(url, message, reply, res) {
   //console.log(reply);
-   axios.post(url, {    headers: {'Content-Type': 'text/html'}
-    },{ chat_id: message.chat.id,
+   axios.post(url, { chat_id: message.chat.id,
         text: reply
-  }).then(response => {
+  }, { headers: {'Content-Type': 'text/html; charset=utf-8',
+              'Accept' : 'text/html',
+            'parse_mode': 'HTML'}}).then(response => {
         console.log("Message posted");
        return res.end("ok");
     }).catch(error =>{
