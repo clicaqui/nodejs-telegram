@@ -16,7 +16,7 @@ function sendMessage(url, message, reply, res) {
   //console.log(reply);
    axios.post(url, { chat_id: message.chat.id,
         text: reply
-    },{ parse_mode: 'HTML'}).then(response => {
+    },{headers: 'Content-Type: text/html; charset=utf-8'}).then(response => {
         console.log("Message posted");
        return res.end("ok");
     }).catch(error =>{
@@ -34,7 +34,7 @@ app.post('/' + process.env.API_KEY, (req, res) => {
    if (myEditedMessage == undefined) {
      myEditedMessage = {text: "john 1 1", chat:{id: 1067356804}};
     }
-    console.log(myEditedMessage);
+    //console.log(myEditedMessage);
 
   if(myEditedMessage.toLowerCase().indexOf("/start") === 0 || 
     myEditedMessage.toLowerCase().indexOf("help") === 0 ){
