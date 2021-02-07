@@ -46,7 +46,7 @@ app.post('/' + process.env.API_KEY, (req, res) => {
     var busca  = getHolyPassage(passage[rnd], reply);  
     busca.then(resp => {
       reply = resp.toString();
-      reply = reply.split('\\n\\t').join('');
+      reply = reply.replace(/\\r\\n/g, "");
       reply = reply.replace('<p', '<pre').replace('p>', 'pre>');
        sendMessage(telegram_url, message, reply, res); 
     });
@@ -60,7 +60,7 @@ app.post('/' + process.env.API_KEY, (req, res) => {
         var busca =  getHolyPassage(passage, reply);  
         busca.then(resp => {
           reply = resp.toString();
-          reply = reply.split('\\n\\t').join('');
+          reply = reply.replace(/\\r\\n/g, "");
           reply = reply.replace('<p', '<pre').replace('p>', 'pre>');
           sendMessage(telegram_url, message, reply, res); 
        });
