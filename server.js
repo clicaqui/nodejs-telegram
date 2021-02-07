@@ -1,16 +1,19 @@
 const express = require('express');
 const app = express();
+
 const bodyParser = require('body-parser');
 const axios = require("axios");
 
 const telegram_url = `https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`;
 
-app.use(express.json());
+app.use(bodyParser.json());
+
 app.use(['/start_bot'],
-  express.urlencoded({
+  bodyParser.urlencoded({
     extended: true,
   })
 );
+
 //app.use(bodyParser.json({limit: '10mb'}));
 app.use(express.static('public'));
 function sendMessage(url, message, reply, res) {
@@ -25,7 +28,7 @@ function sendMessage(url, message, reply, res) {
     });
 };
 
-app.post('/start_bot', function(req, res) {
+app.post('/start_bot', function(res, req) {
   const { message } = req.body;
   //console.log(message);
     
@@ -45,9 +48,8 @@ app.post('/start_bot', function(req, res) {
     }); 
   } 
   sendMessage(telegram_url, message, reply, res); 
-  
  //     return res.end();
 });
 
 let port = process.env.PORT || 3000;
-app.listen(port, () => console.log("Telegram bot is listening on port "));
+app.listen(port, () => console.log("Telegram bot is listening on port 3000"));
