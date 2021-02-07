@@ -22,22 +22,23 @@ function sendMessage(url, message, reply, res) {
        return res.end("ok");
     }).catch(error =>{
         console.log(error);
-        return;
+        return res.end();
     }); 
 };
 
 app.post('/' + process.env.API_KEY, (req, res) => {
    const { message } =  req.body;
-  console.log(message);
+   
+   let reply = "Hi, find your passage on the Bible...";
+   let passage;
+   let myEditedMessage = message.text;
+   if (myEditedMessage == undefined) {
+     myEditedMessage = {text: "john 1 1", chat:{id: 1067356804}};
+    }
+    console.log(myEditedMessage);
 
-  let reply = "Hi, find your passage on the Bible...";
-  let passage;
-  let myEditedMessage = message.text;
-  if (myEditedMessage == undefined) {
-    myEditedMessage = {text: "john 1 1", chat:{id: 1067356804}};
-  }
-  //let busca = {};
-  if(myEditedMessage.toLowerCase().indexOf("/start") === 0){
+  if(myEditedMessage.toLowerCase().indexOf("/start") === 0 || 
+    myEditedMessage.toLowerCase().indexOf("help") === 0 ){
     reply = "To start type: 'Book Charter verso (john 3 26)' ";
     sendMessage(telegram_url, message, reply, res); 
   } else if(myEditedMessage.toLowerCase().indexOf("/phrases") === 0){
@@ -67,7 +68,6 @@ app.post('/' + process.env.API_KEY, (req, res) => {
        });
       }
   } 
-
    // return res.end();
 });
 
