@@ -6,10 +6,11 @@ const telegram_url = `https://api.telegram.org/bot${process.env.API_KEY}/sendMes
 
 const app = express();
 
-app.use(bodyParser.urlencoded({extended: false})); 
-app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({extended: false})); 
+app.use(express.json());
 
 app.use((req, res, next) => {
+  res.setHeader('Content-Type', 'application/json');
   res.setHeader(
     "Access-Control-Allow-Methods",
     "POST, PATCH, PUT"
