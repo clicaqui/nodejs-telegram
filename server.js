@@ -70,7 +70,7 @@ const getHolyPassage = async (passage,reply) => {
  try {
     const response = await axios.get(`https://api.biblia.com/v1/bible/content/LEB.html?passage=${passage}&key=${process.env.BOOK_KEY}`);
     console.log(response.data);
-    reply = result.data + " <br/><p>" + passage + "</p>";
+    reply = response.data + " <br/><p>" + passage + "</p>";
   } catch (err) {
     console.error(err);
     reply = `Passage not found - ${err}`;
