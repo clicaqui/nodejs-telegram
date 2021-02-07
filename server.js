@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 //app.use(bodyParser.json({limit: '10mb'}));
 //app.use(express.static('public'));
 function sendMessage(url, message, reply, res) {
-  console.log(reply);
+  //console.log(reply);
    axios.post(url, { chat_id: message.chat.id,
         text: reply
     }).then(response => {
@@ -35,13 +35,14 @@ app.post('/' + process.env.API_KEY, (req, res) => {
   if (myEditedMessage == undefined) {
     myEditedMessage = {text: "john 1 1", chat:{id: 1067356804}};
   }
- 
+  //let busca = {};
   if(myEditedMessage.toLowerCase().indexOf("hi") === 0){
     reply = "To start type: '/' )";
   } else if(myEditedMessage.toLowerCase().indexOf("/phrases") === 0){
     passage = ["Daniel12.3","John1.1"];
     let rnd = generateRandomPhrase(passage.length, null);
-    reply = getHolyPassage(passage[rnd], reply);  
+    const { busca } = getHolyPassage(passage[rnd], reply);  
+    console.log(busca);
 
   } else if (myEditedMessage.toLowerCase().indexOf("") !== -1){  
     const msg = myEditedMessage.toLowerCase().split(" ");
