@@ -34,11 +34,21 @@ app.post('/' + process.env.API_KEY, (req, res) => {
    console.log(myEditedMessage);
 
   if(myEditedMessage.toLowerCase().indexOf("/start") === 0 || 
-    myEditedMessage.toLowerCase().indexOf("help") === 0 ){
-    reply = "To start type: 'Book Charter verso (john 3 26)' ";
+    myEditedMessage.toLowerCase().indexOf("/help") === 0 ){
+    reply = "To start type: '/find john 3 26' ";
     sendMessage(telegram_url, message, reply, res); 
+  } else if(myEditedMessage.toLowerCase().indexOf("/oldbooks")){
+    for(const item in OLDBOOKS){
+      reply += item + " "
+    }
+    sendMessage(telegram_url, message, reply, res);  
+  } else if(myEditedMessage.toLowerCase().indexOf("/newbooks")){
+    for(const item in NEWBOOKS){
+      reply += item + " "
+    }
+    sendMessage(telegram_url, message, reply, res);  
   } else if(myEditedMessage.toLowerCase().indexOf("/phrases") === 0){
-    passage = ["Daniel12.3","John1.1"];
+    passage = RANDOM_PASSAGES;
     let rnd = generateRandomPhrase(passage.length, null);
     var busca  = getHolyPassage(passage[rnd], reply);  
     busca.then(resp => {
@@ -61,17 +71,19 @@ app.post('/' + process.env.API_KEY, (req, res) => {
         passage = msg[1] + book + msg[3] + "." + msg[4];
       }  
       if (book) {
-
-        var busca =  getHolyPassage(passage, reply);  
-        busca.then(resp => {
-          reply = resp;
-          //reply = reply.replace(/\\\\n\\\\t/g, '');
-          //reply = reply.replace(/\<br/g, '');
-          //reply = reply.replace(/\<p/g, '<pre').replace(/p\>/g, 'pre>');
-
+        console.log(OLDBOOKS.map(bk => bk = book));
+        if (OLDBOOKS.map(bk => bk = book) || NEWBOOKS.map(bk => bk = book) ){
+          var busca =  getHolyPassage(passage, reply);  
+          busca.then(resp => {
+            reply = resp;
+            sendMessage(telegram_url, message, reply, res); 
+          });
+        } else {
+          reply = "Book informed not exist!";
           sendMessage(telegram_url, message, reply, res); 
-        });
-      }
+        }
+
+      } 
       
     } 
     return res.end();
@@ -104,4 +116,6 @@ const getHolyPassage = async (passage,reply) => {
   }
   return reply;
 }
-
+const OLDBOOKS = ["Genesis" , "Exodus", "Leviticus", "Numbers", "Deuteronomy", "Joshua", "Judges", "Samuel", "Kings", "Chronicles", "Nehemiah", "Job", "Psalm", "Proverbs", "Ecclesiastes", "Isaiah", "Jeremiah", "Ezekiel", "Daniel", "Hosea", "Joel", "Amos", "Jonah", "Naum","Micah", "Habakkuk", "Zephaniah", "Haggai", "Malachi"];
+const NEWBOOKD = ["Matthew", "Mark", "Luke", "John", "Acts", "Romans", "Corinthians", "Galatians", "Ephesians", "Philippians", "Colossians", "Thessalonians", "Timothy", "Titus", "Hebrews" , "James", "Peter", "Jude", "Revelation"];
+const RANDOM_PASSAGES = ["Daniel12.3","John1.1","Isaiah57.18"];
