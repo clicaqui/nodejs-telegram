@@ -9,20 +9,6 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use(function( req, res, next ) {
-  var data = '';
-  req.on('data', function( chunk ) {
-    data += chunk;
-  });
-  req.on('end', function() {
-    req.rawBody = data;
-    console.log( 'on end: ', data )
-    if (data && data.indexOf('{') > -1 ) {
-      req.body = JSON.parse(data);
-    }
-    next();
-  });
-});
 
 //app.use(bodyParser.json({limit: '10mb'}));
 //app.use(express.static('public'));
@@ -40,7 +26,7 @@ function sendMessage(url, message, reply, res) {
 };
 
 app.post('/' + process.env.API_KEY, (req, res) => {
-   const { message } = req.body;
+   const message = req.body;
    
    let reply = "Hi, find your passage on the Bible...";
    let passage;
