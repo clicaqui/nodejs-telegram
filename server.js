@@ -16,7 +16,8 @@ function sendMessage(url, message, reply, res) {
   //console.log(reply);
    axios.post(url, { chat_id: message.chat.id,
         text: reply,
-    headers: {'Content-Type': 'text/html; charset=utf-8'}
+    headers: {'Content-Type': 'text/html; charset=utf-8'},
+    parse_mode: 'ParseMode.HTML'
   }).then(response => {
         console.log("Message posted");
        return res.end("ok");
