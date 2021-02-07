@@ -46,7 +46,9 @@ app.post('/' + process.env.API_KEY, (req, res) => {
     const book = msg[1].charAt(0).toUpperCase() + msg[1].slice(1);
     passage = book + msg[2] + "." + msg[3];
     
-     reply = await getHolyPassage(passage, reply);  
+     reply = setTimeout(() => {
+        getHolyPassage(passage, reply);  
+  }, 5000 );
   } 
   sendMessage(telegram_url, message, reply, res); 
  //     return res.end();
