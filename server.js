@@ -80,6 +80,6 @@ const getHolyPassage = async (passage,reply) => {
     console.error(err);
     reply = `Passage not found - ${err}`;
   }
-  return reply;
+  return Promise.resolve( reply );
 }
 
