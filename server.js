@@ -29,7 +29,8 @@ app.post('/' + process.env.API_KEY, (req, res) => {
   //console.log(message.text);
 
   let reply = "Hi, find your passage on the Bible...";
-  const myEditedMessage = Object.keys(req.body)[1].text;
+  const myEditedMessage = Object.keys(req.body)[1].text.toString();
+
   if(myEditedMessage.toLowerCase().indexOf("hi") === 0){
     reply = "To start type: '/' )";
   } else if(myEditedMessage.toLowerCase().indexOf("/phrases") === 0){
