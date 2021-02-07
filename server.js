@@ -37,7 +37,7 @@ app.post('/' + process.env.API_KEY, (req, res) => {
     myEditedMessage = {text: "john 1 1", chat:{id: 1067356804}};
   }
   //let busca = {};
-  if(myEditedMessage.toLowerCase().indexOf("help") === 0){
+  if(myEditedMessage.toLowerCase().indexOf("/start") === 0){
     reply = "To start type: 'Book Charter verso (john 3 26)' ";
     sendMessage(telegram_url, message, reply, res); 
   } else if(myEditedMessage.toLowerCase().indexOf("/phrases") === 0){
