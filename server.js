@@ -25,16 +25,15 @@ function sendMessage(url, message, reply, res) {
 
 app.post('/' + process.env.API_KEY, (req, res) => {
   console.log(Object(req.body));
-  //try{req.body = JSON.parse(Object.keys(req.body)[0])}catch(err){req.body = req.body}
-  const  message  =  Object(req.body);
-  console.log(message.text);
-  
-    
+  const { message } =  req.body;
+  //console.log(message.text);
+
   let reply = "Hi, find your passage on the Bible...";
-  if(message.text.toLowerCase().indexOf("hi") === 0){
+  const myEditedMessage = message.edited_message.text;
+  if(myEditedMessage.toLowerCase().indexOf("hi") === 0){
     reply = "To start type: '/' )";
-  } else if(message.text.toLowerCase().indexOf("/phrases") === 0){
-    const msg = message.text.toLowerCase().split(" ");
+  } else if(myEditedMessage.toLowerCase().indexOf("/phrases") === 0){
+    const msg = myEditedMessage.toLowerCase().split(" ");
     const book = msg[1].charAt(0).toUpperCase() + msg[1].slice(1);
     const passage = book + msg[2] + "." + msg[3];
     
