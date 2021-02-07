@@ -7,17 +7,16 @@ const telegram_url = `https://api.telegram.org/bot${process.env.API_KEY}/sendMes
 
 const app = express();
 
-app.use(bodyParser.urlencoded({extended: false})); 
+app.use(bodyParser.urlencoded({extended: true})); 
 app.use(bodyParser.json());
 
 //app.use(bodyParser.json({limit: '10mb'}));
 //app.use(express.static('public'));
 function sendMessage(url, message, reply, res) {
   //console.log(reply);
-   axios.post(url, { chat_id: message.chat.id,
-        text: reply,
-    headers: {'Content-Type': 'text/html; charset=utf-8'},
-    parse_mode: 'ParseMode.HTML'
+   axios.post(url, {    headers: {'Content-Type': 'text/html'}
+    },{ chat_id: message.chat.id,
+        text: reply
   }).then(response => {
         console.log("Message posted");
        return res.end("ok");
