@@ -49,16 +49,16 @@ app.post('/' + process.env.API_KEY, (req, res) => {
        sendMessage(telegram_url, message, reply, res); 
     });
 
-  } else if (myEditedMessage.toLowerCase().indexOf("") !== -1){  
+  } else if (myEditedMessage.toLowerCase().indexOf("/find") !== -1){  
     const msg = myEditedMessage.toLowerCase().split(" ");
     //console.log(msg.length);
     let book;
-      if (msg.length == 3) {
-         book = msg[0].charAt(0).toUpperCase() + msg[0].slice(1);
-        passage = book + msg[1] + "." + msg[2];
-       } else if (msg.length > 3){
-         book = msg[1].charAt(0).toUpperCase() + msg[0].slice(1);
-        passage = msg[0] + book + msg[2] + "." + msg[3];
+      if (msg.length == 4) {
+         book = msg[1].charAt(0).toUpperCase() + msg[1].slice(1);
+        passage = book + msg[2] + "." + msg[3];
+       } else if (msg.length > 4){
+         book = msg[2].charAt(0).toUpperCase() + msg[2].slice(1);
+        passage = msg[1] + book + msg[3] + "." + msg[4];
       }  
       if (book) {
 
