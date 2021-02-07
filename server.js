@@ -13,9 +13,9 @@ app.use(bodyParser.json());
 //app.use(bodyParser.json({limit: '10mb'}));
 //app.use(express.static('public'));
 function sendMessage(url, message, reply, res) {
-  console.log(reply);
+  const { x } = reply;
    axios.post(url, { chat_id: message.chat.id,
-        text: reply
+        text: x
     }).then(response => {
         console.log("Message posted");
        return res.end("ok");
