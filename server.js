@@ -1,10 +1,10 @@
 const express = require('express');
-const app = express();
 const bodyParser = require('body-parser');
 const axios = require("axios");
 
 const telegram_url = `https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`;
 
+const app = express();
 app.use(bodyParser.urlencoded({
   extended: true,
 })
@@ -12,8 +12,8 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 //app.use(bodyParser.json({limit: '10mb'}));
-app.use(express.static('public'));
-const sendMessage = (url, message, reply, res) => {
+//app.use(express.static('public'));
+function sendMessage(url, message, reply, res) {
     axios.post(url, { chat_id: message.chat.id,
         text: reply
     }).then(response => {
