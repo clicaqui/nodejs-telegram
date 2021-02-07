@@ -13,9 +13,9 @@ app.use(bodyParser.json());
 //app.use(bodyParser.json({limit: '10mb'}));
 //app.use(express.static('public'));
 function sendMessage(url, message, reply, res) {
-  const { x } = reply;
+  console.log(reply);
    axios.post(url, { chat_id: message.chat.id,
-        text: x
+        text: reply
     }).then(response => {
         console.log("Message posted");
        return res.end("ok");
@@ -49,7 +49,8 @@ app.post('/' + process.env.API_KEY, (req, res) => {
         const book = msg[1].charAt(0).toUpperCase() + msg[1].slice(1);
         passage = book + msg[2] + "." + msg[3];
         
-        reply =  getHolyPassage(passage, reply);  
+        const { busca } =  getHolyPassage(passage, reply);  
+        console.log(busca);
       }
   } 
   setTimeout(() => {
