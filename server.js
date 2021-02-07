@@ -13,10 +13,10 @@ app.use(bodyParser.json());
 //app.use(bodyParser.json({limit: '10mb'}));
 //app.use(express.static('public'));
 function sendMessage(url, message, reply, res) {
-  //console.log(reply);
+  console.log(reply);
    axios.post(url, { chat_id: message.chat.id,
         text: reply,
-        parse_mode: 'HTML'
+       // parse_mode: 'HTML'
     }).then(response => {
         console.log("Message posted");
        return res.end("ok");
@@ -49,6 +49,7 @@ app.post('/' + process.env.API_KEY, (req, res) => {
       reply = reply.replace('/\\n\\t/g', "");
       console.log(reply);
       reply = reply.replace('<p', '<pre').replace('p>', 'pre>');
+      reply = reply.replace('<p', '<pre').replace('p>', 'pre>');
        sendMessage(telegram_url, message, reply, res); 
     });
 
@@ -62,6 +63,7 @@ app.post('/' + process.env.API_KEY, (req, res) => {
         busca.then(resp => {
           reply = resp.toString();
           reply = reply.replace(/\\n\\t/g, "");
+          reply = reply.replace('<p', '<pre').replace('p>', 'pre>');
           reply = reply.replace('<p', '<pre').replace('p>', 'pre>');
           sendMessage(telegram_url, message, reply, res); 
        });
