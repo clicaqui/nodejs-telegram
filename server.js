@@ -30,7 +30,7 @@ app.post('/' + process.env.API_KEY, (req, res) => {
    let reply = "Hi, find your passage on the Bible...";
    let passage;
    let myEditedMessage = message.text;
-    //console.log(myEditedMessage);
+    console.log(myEditedMessage);
 
   if(myEditedMessage.toLowerCase().indexOf("/start") === 0 || 
     myEditedMessage.toLowerCase().indexOf("help") === 0 ){
@@ -65,7 +65,7 @@ app.post('/' + process.env.API_KEY, (req, res) => {
        });
       }
   } 
-  // return res.end();
+   return res.end();
 });
 
 let port = process.env.PORT || 3000;
