@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const axios = require("axios");
-const connect = require ('connect');
 
 const telegram_url = `https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`;
 
@@ -9,12 +8,20 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(bodyParser());
 
-app.all('/*', function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Content-Type,accept,access_token,X-Requested-With');
+app.use(function( req, res, next ) {
+  var data = '';
+  req.on('data', function( chunk ) {
+    data += chunk;
+  });
+  req.on('end', function() {
+    req.rawBody = data;
+    console.log( 'on end: ', data )
+    if (data && data.indexOf('{') > -1 ) {
+      req.body = JSON.parse(data);
+    }
     next();
+  });
 });
 
 //app.use(bodyParser.json({limit: '10mb'}));
