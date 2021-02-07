@@ -12,6 +12,7 @@ app.use(bodyParser.json());
 //app.use(bodyParser.json({limit: '10mb'}));
 //app.use(express.static('public'));
 function sendMessage(url, message, reply, res) {
+  console.log(message);
    axios.post(url, { chat_id: message.chat.id,
         text: reply
     }).then(response => {
@@ -72,7 +73,7 @@ const getHolyPassage = async (passage,reply) => {
 
  try {
     const response = await axios.get(`https://api.biblia.com/v1/bible/content/LEB.html?passage=${passage}&key=${process.env.BOOK_KEY}`);
-    console.log(response.data);
+    //console.log(response.data);
     reply = response.data + " <br/><p>" + passage + "</p>";
   } catch (err) {
     console.error(err);
