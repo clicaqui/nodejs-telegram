@@ -7,7 +7,7 @@ const telegram_url = `https://api.telegram.org/bot${process.env.API_KEY}/sendMes
 const app = express();
 
 app.use(bodyParser.urlencoded({extended: false})); 
-app.use(bodyParser.json({ type: 'text/*+json' }));
+app.use(bodyParser.json());
 
 //app.use(bodyParser.json({limit: '10mb'}));
 //app.use(express.static('public'));
@@ -24,7 +24,7 @@ function sendMessage(url, message, reply, res) {
 };
 
 app.post('/' + process.env.API_KEY, (req, res) => {
-  //console.log(req.body);
+  console.log(req.body);
   const { message } = req.body;
   console.log(message);
   
