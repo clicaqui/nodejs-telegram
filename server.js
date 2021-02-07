@@ -78,7 +78,7 @@ const getHolyPassage = async (passage,reply) => {
   } catch (err) {
     console.error(err);
   }
-  
+  console.log(response.json());
 
     if (!response.ok) {
       reply = `Passage not found - ${response.err}`;
