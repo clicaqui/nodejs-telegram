@@ -5,11 +5,11 @@ const bodyParser = require('body-parser');
 const telegram_url = `https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`;
 
 const app = express();
-/* app.use(bodyParser.urlencoded({
-  extended: true,
+app.use(bodyParser.urlencoded({
+  extended: false,
 })
-); */
-app.use(bodyParser.json({ type: 'application/json' }));
+); 
+app.use(bodyParser.json({ type: 'application/*+json' }));
 
 
 //app.use(bodyParser.json({limit: '10mb'}));
@@ -29,7 +29,7 @@ function sendMessage(url, message, reply, res) {
 app.post('/' + process.env.API_KEY, (req, res) => {
   //console.log(req.body);
   const { message } = req.body;
-  console.log(Object(message));
+  console.log(message);
   
     
   let reply = "Hi, find your passage on the Bible...";
