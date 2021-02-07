@@ -41,14 +41,14 @@ app.post('/' + process.env.API_KEY, (req, res) => {
     reply = "The old testament books are ";
     for(var item in OLDBOOKS){
       console.log(item);
-      reply += item.value + " ";
+      reply += OLDBOOKS[item] + " ";
     }
     sendMessage(telegram_url, message, reply, res);  
   } else if(myEditedMessage.toLowerCase().indexOf("/newtestament") === 0){
      reply = "The new testament books are ";
     for(var item in NEWBOOKS){
-      console.log(item);
-      reply += item.value + " ";
+
+      reply += NEWBOOKS[item] + " ";
     }
     sendMessage(telegram_url, message, reply, res);  
   } else if(myEditedMessage.toLowerCase().indexOf("/phrases") === 0){
@@ -65,30 +65,27 @@ app.post('/' + process.env.API_KEY, (req, res) => {
 
   } else if (myEditedMessage.toLowerCase().indexOf("/find") !== -1){  
     const msg = myEditedMessage.toLowerCase().split(" ");
-    //console.log(msg.length);
+
     let book;
-      if (msg.length == 4) {
+      if (msg.length == 4 && OLDBOOKS.map(bk => bk.toLowerCase()).includes(msg[1]) &&
+         NEWBOOKS.map(bk => bk.toLowerCase()).includes(msg[1])) {
          book = msg[1].charAt(0).toUpperCase() + msg[1].slice(1);
         passage = book + msg[2] + "." + msg[3];
-       } else if (msg.length > 4){
+       } else if (msg.length > 4 && OLDBOOKS.map(bk => bk.toLowerCase()).includes(msg[2]) &&
+           NEWBOOKS.map(bk => bk.toLowerCase()).includes(msg[2])){
          book = msg[2].charAt(0).toUpperCase() + msg[2].slice(1);
         passage = msg[1] + book + msg[3] + "." + msg[4];
       }  
       if (book) {
-        console.log(OLDBOOKS.map(bk => bk = book));
-        if (OLDBOOKS.map(bk => bk = book) || NEWBOOKS.map(bk => bk = book) ){
-          var busca =  getHolyPassage(passage, reply);  
-          busca.then(resp => {
-            reply = resp;
-            sendMessage(telegram_url, message, reply, res); 
-          });
-        } else {
-          reply = "Book informed not exist!";
+        var busca =  getHolyPassage(passage, reply);  
+        busca.then(resp => {
+          reply = resp;
           sendMessage(telegram_url, message, reply, res); 
-        }
-
-      } 
-      
+        });
+      } else {
+        reply = "Book informed not exist!";
+        sendMessage(telegram_url, message, reply, res); 
+      }
     } 
     return res.end();
 });
