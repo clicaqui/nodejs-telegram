@@ -9,7 +9,7 @@ const app = express();
   extended: true,
 })
 ); */
-app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
+app.use(bodyParser.json({ type: 'application/json' }));
 
 
 //app.use(bodyParser.json({limit: '10mb'}));
