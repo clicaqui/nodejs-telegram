@@ -10,7 +10,8 @@ app.use(bodyParser.urlencoded({
 })
 ); 
 //app.use(bodyParser.json({ type: 'application/*+json' }));
-app.use(express.bodyParser());
+//app.use(express.bodyParser());
+app.use(express.json());
 
 //app.use(bodyParser.json({limit: '10mb'}));
 //app.use(express.static('public'));
