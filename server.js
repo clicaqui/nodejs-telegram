@@ -29,8 +29,8 @@ app.post('/' + process.env.API_KEY, (req, res) => {
    
    let reply = "Hi, find your passage on the Bible...";
    let passage;
+   console.log(myEditedMessage);
    let myEditedMessage = message.text;
-    console.log(myEditedMessage);
 
   if(myEditedMessage.toLowerCase().indexOf("/start") === 0 || 
     myEditedMessage.toLowerCase().indexOf("help") === 0 ){
