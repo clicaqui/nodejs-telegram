@@ -38,12 +38,14 @@ app.post('/' + process.env.API_KEY, (req, res) => {
   //let busca = {};
   if(myEditedMessage.toLowerCase().indexOf("hi") === 0){
     reply = "To start type: '/' ";
+    sendMessage(telegram_url, message, reply, res); 
   } else if(myEditedMessage.toLowerCase().indexOf("/phrases") === 0){
     passage = ["Daniel12.3","John1.1"];
     let rnd = generateRandomPhrase(passage.length, null);
     var busca  = getHolyPassage(passage[rnd], reply);  
     busca.then(resp => {
        reply = resp;
+       sendMessage(telegram_url, message, reply, res); 
     });
 
   } else if (myEditedMessage.toLowerCase().indexOf("") !== -1){  
@@ -54,12 +56,13 @@ app.post('/' + process.env.API_KEY, (req, res) => {
         var busca =  getHolyPassage(passage, reply);  
         busca.then(resp => {
           reply = resp;
+          sendMessage(telegram_url, message, reply, res); 
        });
       }
   } 
-  //setTimeout(() => {
-     sendMessage(telegram_url, message, reply, res); 
- // }, 4000 );
+ // setTimeout(() => {
+  //   sendMessage(telegram_url, message, reply, res); 
+  //}, 4000 );
  //     return res.end();
 });
 
