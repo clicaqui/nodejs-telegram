@@ -26,7 +26,7 @@ function sendMessage(url, message, reply, res) {
 };
 
 app.post('/' + process.env.API_KEY, (req, res) => {
-   const message = req.body;
+   const { message } = req.body;
    
    let reply = "Hi, find your passage on the Bible...";
    let passage;
