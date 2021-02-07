@@ -5,11 +5,17 @@ const bodyParser = require('body-parser');
 const telegram_url = `https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`;
 
 const app = express();
-app.use(express.bodyParser.urlencoded({
+app.use(bodyParser.urlencoded({
   extended: true,
 })
 );
-app.use(express.bodyParser.json());
+app.use(bodyParser.json());
+
+// create application/json parser
+var jsonParser = bodyParser.json()
+ 
+// create application/x-www-form-urlencoded parser
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 //app.use(bodyParser.json({limit: '10mb'}));
 //app.use(express.static('public'));
@@ -25,7 +31,7 @@ function sendMessage(url, message, reply, res) {
     }); 
 };
 
-app.post('/' + process.env.API_KEY, (req, res) => {
+app.post('/' + process.env.API_KEY, urlencodedParser, (req, res) => {
   //console.log(req.body);
   const { message } = { ...req.body};
   console.log(Object(message));
