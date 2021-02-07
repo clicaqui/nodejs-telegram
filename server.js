@@ -59,6 +59,8 @@ app.post('/' + process.env.API_KEY, (req, res) => {
          book = msg[1].charAt(0).toUpperCase() + msg[0].slice(1);
         passage = msg[0] + book + msg[2] + "." + msg[3];
       }  
+      if (book) {
+
         var busca =  getHolyPassage(passage, reply);  
         busca.then(resp => {
           reply = resp;
@@ -67,7 +69,8 @@ app.post('/' + process.env.API_KEY, (req, res) => {
           //reply = reply.replace(/\<p/g, '<pre').replace(/p\>/g, 'pre>');
 
           sendMessage(telegram_url, message, reply, res); 
-       });
+        });
+      }
       
     } 
     return res.end();
