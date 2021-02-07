@@ -17,10 +17,10 @@ function sendMessage(url, message, reply, res) {
         text: reply
   }).then(response => {
         console.log("Message posted");
-       return res.end("ok");
+      // return res.end("ok");
     }).catch(error =>{
         console.log(error);
-        return res.end();
+      //  return res.end();
     }); 
 };
 
@@ -51,9 +51,14 @@ app.post('/' + process.env.API_KEY, (req, res) => {
   } else if (myEditedMessage.toLowerCase().indexOf("") !== -1){  
     const msg = myEditedMessage.toLowerCase().split(" ");
     //console.log(msg.length);
+    const book;
       if (msg.length == 3) {
-        const book = msg[0].charAt(0).toUpperCase() + msg[0].slice(1);
+         book = msg[0].charAt(0).toUpperCase() + msg[0].slice(1);
         passage = book + msg[1] + "." + msg[2];
+       } else if (msg.length > 3){
+         book = msg[1].charAt(0).toUpperCase() + msg[0].slice(1);
+        passage = msg[0] + book + msg[2] + "." + msg[3];
+      }  
         var busca =  getHolyPassage(passage, reply);  
         busca.then(resp => {
           reply = resp;
@@ -63,9 +68,9 @@ app.post('/' + process.env.API_KEY, (req, res) => {
 
           sendMessage(telegram_url, message, reply, res); 
        });
-      }
-  } 
-   return res.end();
+      
+    } 
+    return res.end();
 });
 
 let port = process.env.PORT || 3000;
