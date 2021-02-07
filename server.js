@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express();
-
 //const bodyParser = require('body-parser');
 const axios = require("axios");
+require('dotenv').config();
 
 const telegram_url = `https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`;
 
