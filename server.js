@@ -9,13 +9,8 @@ const app = express();
   extended: true,
 })
 ); */
-app.use(bodyParser.json());
+app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 
-// create application/json parser
-var jsonParser = express.json()
- 
-// create application/x-www-form-urlencoded parser
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 //app.use(bodyParser.json({limit: '10mb'}));
 //app.use(express.static('public'));
@@ -31,9 +26,9 @@ function sendMessage(url, message, reply, res) {
     }); 
 };
 
-app.post('/' + process.env.API_KEY, jsonParser, (req, res) => {
+app.post('/' + process.env.API_KEY, (req, res) => {
   //console.log(req.body);
-  const { message } = { ...req.body};
+  const { message } = req.body;
   console.log(Object(message));
   
     
