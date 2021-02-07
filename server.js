@@ -26,10 +26,13 @@ function sendMessage(url, message, reply, res) {
 app.post('/' + process.env.API_KEY, (req, res) => {
   //console.log(Object(req.body));
   const { message } =  req.body;
-  console.log(Object.keys(req.body)[1]);
+  console.log(Object.keys(req.body)[1].text);
 
   let reply = "Hi, find your passage on the Bible...";
-  const myEditedMessage = Object.keys(req.body)[1].text.toString();
+  const myEditedMessage = message.text;
+  if (myEditedMessage == undefined) {
+    myEditedMessage = "john 1 1";
+  }
 
   if(myEditedMessage.toLowerCase().indexOf("hi") === 0){
     reply = "To start type: '/' )";
