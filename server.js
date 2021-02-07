@@ -73,8 +73,9 @@ const generateRandomPhrase = (max, exclude) => {
 
 const getHolyPassage = async (passage,reply) => {
 
+  const resposta;
  try {
-    const resposta = await axios.get(`https://api.biblia.com/v1/bible/content/LEB.html?passage=${passage}&key=${process.env.BOOK_KEY}`);
+     resposta = await axios.get(`https://api.biblia.com/v1/bible/content/LEB.html?passage=${passage}&key=${process.env.BOOK_KEY}`);
   } catch (err) {
     console.error(err);
   }
