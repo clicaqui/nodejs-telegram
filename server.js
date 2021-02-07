@@ -67,12 +67,14 @@ app.post('/' + process.env.API_KEY, (req, res) => {
     const msg = myEditedMessage.toLowerCase().split(" ");
 
     let book;
-      if (msg.length == 4 && OLDBOOKS.map(bk => bk.toLowerCase()).includes(msg[1]) &&
-         NEWBOOKS.map(bk => bk.toLowerCase()).includes(msg[1])) {
+    console.log(OLDBOOKS.map(bk => bk.toLowerCase()).includes(msg[1]) );
+    console.log( NEWBOOKS.map(bk => bk.toLowerCase()).includes(msg[1]));
+      if (msg.length == 4 && (OLDBOOKS.map(bk => bk.toLowerCase()).includes(msg[1]) ||
+         NEWBOOKS.map(bk => bk.toLowerCase()).includes(msg[1]))) {
          book = msg[1].charAt(0).toUpperCase() + msg[1].slice(1);
         passage = book + msg[2] + "." + msg[3];
-       } else if (msg.length > 4 && OLDBOOKS.map(bk => bk.toLowerCase()).includes(msg[2]) &&
-           NEWBOOKS.map(bk => bk.toLowerCase()).includes(msg[2])){
+       } else if (msg.length > 4 && (OLDBOOKS.map(bk => bk.toLowerCase()).includes(msg[2]) ||
+           NEWBOOKS.map(bk => bk.toLowerCase()).includes(msg[2]))){
          book = msg[2].charAt(0).toUpperCase() + msg[2].slice(1);
         passage = msg[1] + book + msg[3] + "." + msg[4];
       }  
