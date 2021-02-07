@@ -40,12 +40,14 @@ app.post('/' + process.env.API_KEY, (req, res) => {
   } else if(myEditedMessage.toLowerCase().indexOf("/oldtestament") === 0){
     reply = "The old testament books are ";
     for(var item in OLDBOOKS){
+      console.log(item);
       reply += item.value + " ";
     }
     sendMessage(telegram_url, message, reply, res);  
   } else if(myEditedMessage.toLowerCase().indexOf("/newtestament") === 0){
      reply = "The new testament books are ";
     for(var item in NEWBOOKS){
+      console.log(item);
       reply += item.value + " ";
     }
     sendMessage(telegram_url, message, reply, res);  
