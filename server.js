@@ -44,11 +44,12 @@ app.post('/' + process.env.API_KEY, (req, res) => {
 
   } else if (myEditedMessage.toLowerCase().indexOf("") !== -1){  
     const msg = myEditedMessage.toLowerCase().split(" ");
-    const book = msg[1].charAt(0).toUpperCase() + msg[1].slice(1);
-    passage = book + msg[2] + "." + msg[3];
-    
-    reply =  getHolyPassage(passage, reply);  
-
+      if (msg.length > 3) {
+        const book = msg[1].charAt(0).toUpperCase() + msg[1].slice(1);
+        passage = book + msg[2] + "." + msg[3];
+        
+        reply =  getHolyPassage(passage, reply);  
+      }
   } 
   setTimeout(() => {
      sendMessage(telegram_url, message, reply, res); 
