@@ -45,7 +45,8 @@ app.post('/' + process.env.API_KEY, (req, res) => {
     let rnd = generateRandomPhrase(passage.length, null);
     var busca  = getHolyPassage(passage[rnd], reply);  
     busca.then(resp => {
-      reply = resp.replace('\\n\\t','');
+      console.log(resp.toString().replaceAll("\\n\\t",""));
+      reply = resp.toString().replaceAll("\\n\\t","");
        sendMessage(telegram_url, message, reply, res); 
     });
 
