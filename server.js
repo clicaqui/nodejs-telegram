@@ -26,7 +26,7 @@ function sendMessage(url, message, reply, res) {
 app.post('/' + process.env.API_KEY, (req, res) => {
   console.log(Object(req.body));
   //try{req.body = JSON.parse(Object.keys(req.body)[0])}catch(err){req.body = req.body}
-  const { message } =  Object(req.body);
+  const  message  =  Object(req.body);
   console.log(message.text);
   
     
