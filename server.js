@@ -38,13 +38,13 @@ app.post('/' + process.env.API_KEY, (req, res) => {
     reply = "To start type: '/' )";
   } else if(myEditedMessage.toLowerCase().indexOf("/phrases") === 0){
     passage = "Daniel 12 3";
-    reply = getHolyPassage(passage);  
+    reply = getHolyPassage(passage, reply);  
   } else if (myEditedMessage.toLowerCase().indexOf("") !== -1){  
     const msg = myEditedMessage.toLowerCase().split(" ");
     const book = msg[1].charAt(0).toUpperCase() + msg[1].slice(1);
     const passage = book + msg[2] + "." + msg[3];
     
-     reply = getHolyPassage(passage);  
+     reply = getHolyPassage(passage, reply);  
   } 
   sendMessage(telegram_url, message, reply, res); 
  //     return res.end();
@@ -63,8 +63,7 @@ const generateRandomPhrase = (min, max, exclude) => {
   }
 }
 
-function getHolyPassage(passage) {
-  let reply;
+function getHolyPassage(passage,reply) {
   axios.get(`https://api.biblia.com/v1/bible/content/LEB.html?passage=${passage}&key=${process.env.BOOK_KEY}`).then(result => {
     console.log(result);
     reply = result.data + " <br/><p>" + passage + "</p>";
