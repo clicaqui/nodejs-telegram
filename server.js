@@ -48,21 +48,21 @@ app.post('/' + process.env.API_KEY, (req, res) => {
       reply = resp.toString();
       reply = reply.innerHTML();
       console.log(reply);
-      reply = reply.replace('<p', '<pre').replace('p>', 'pre>');
+      reply = reply.replace('/<p\g', '<pre').replace('/p>\g', 'pre>');
        sendMessage(telegram_url, message, reply, res); 
     });
 
   } else if (myEditedMessage.toLowerCase().indexOf("") !== -1){  
     const msg = myEditedMessage.toLowerCase().split(" ");
     console.log(msg.length);
-      if (msg.length = 3) {
+      if (msg.length == 3) {
         const book = msg[0].charAt(0).toUpperCase() + msg[0].slice(1);
         passage = book + msg[1] + "." + msg[2];
         var busca =  getHolyPassage(passage, reply);  
         busca.then(resp => {
           reply = resp.toString();
           reply = reply.innerHTML();
-          reply = reply.replace('<p', '<pre').replace('p>', 'pre>');
+          reply = reply.replace('/<p\g', '<pre').replace('/p>\g', 'pre>');
           //reply = reply.replace('<p', '<pre').replace('p>', 'pre>');
           sendMessage(telegram_url, message, reply, res); 
        });
