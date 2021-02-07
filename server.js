@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const axios = require("axios");
 
-const telegram_url = `https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`;
+const telegram_url = `https://api.telegram.org/bot${process.env.API_KEY}/sendMessage?parse_mode=html`;
 
 const app = express();
 
@@ -24,11 +24,11 @@ function sendMessage(url, message, reply, res) {
 };
 
 app.post('/' + process.env.API_KEY, (req, res) => {
-  //console.log(Object(req.body));
-  const { message } =  req.body;
+   const { message } =  req.body;
   console.log(message);
 
   let reply = "Hi, find your passage on the Bible...";
+  let passage;
   let myEditedMessage = message.text;
   if (myEditedMessage == undefined) {
     myEditedMessage = {text: "john 1 1", chat:{id: 1067356804}};
@@ -37,16 +37,14 @@ app.post('/' + process.env.API_KEY, (req, res) => {
   if(myEditedMessage.toLowerCase().indexOf("hi") === 0){
     reply = "To start type: '/' )";
   } else if(myEditedMessage.toLowerCase().indexOf("/phrases") === 0){
+    passage = "Daniel 12 3";
+    reply = getHolyPassage(passage);  
+  } else if (myEditedMessage.toLowerCase().indexOf("") !== -1){  
     const msg = myEditedMessage.toLowerCase().split(" ");
     const book = msg[1].charAt(0).toUpperCase() + msg[1].slice(1);
     const passage = book + msg[2] + "." + msg[3];
     
-     axios.get(`https://api.biblia.com/v1/bible/content/LEB.html?passage=${passage}&key=${process.env.BOOK_KEY}`).then(result => {
-      console.log(result);
-      reply = result + " - " + passage; 
-    }).catch(err => {
-      reply = `Passage not found - ${err}`;
-    });  
+     reply = getHolyPassage(passage);  
   } 
   sendMessage(telegram_url, message, reply, res); 
  //     return res.end();
@@ -54,3 +52,15 @@ app.post('/' + process.env.API_KEY, (req, res) => {
 
 let port = process.env.PORT || 3000;
 app.listen(port, () => console.log("Telegram bot is listening on port 3000"));
+
+function getHolyPassage(passage) {
+  let reply;
+  axios.get(`https://api.biblia.com/v1/bible/content/LEB.html?passage=${passage}&key=${process.env.BOOK_KEY}`).then(result => {
+    console.log(result);
+    reply = result.data + " <br/><p>" + passage + "</p>";
+  }).catch(err => {
+    reply = `Passage not found - ${err}`;
+  });
+  return reply;
+}
+
