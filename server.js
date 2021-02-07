@@ -27,7 +27,7 @@ app.post('/' + process.env.API_KEY, (req, res) => {
   console.log(req.body);
   try{req.body = JSON.parse(Object.keys(req.body)[0])}catch(err){req.body = req.body}
   const { message } = req.body;
-  console.log(message);
+  console.log(Object.keys(req.body)[0]);
   
     
   let reply = "Hi, find your passage on the Bible...";
