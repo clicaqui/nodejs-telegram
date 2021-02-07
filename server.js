@@ -24,12 +24,12 @@ function sendMessage(url, message, reply, res) {
 };
 
 app.post('/' + process.env.API_KEY, (req, res) => {
-  //console.log(Object(req.body));
+  console.log(Object(req.body));
   const { message } =  req.body;
-  console.log(Object.keys(req.body)[1].text);
+  //console.log(Object.keys(req.body)[1].text);
 
   let reply = "Hi, find your passage on the Bible...";
-  let myEditedMessage = Object.keys(req.body)[1].text;
+  let myEditedMessage = message;
   if (myEditedMessage == undefined) {
     myEditedMessage = {text: "john 1 1", chat:{id: 1067356804}};
   }
