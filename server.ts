@@ -1,37 +1,31 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const axios = require("axios");
+//const express = require('express');
+import express from 'express';
+import bodyParser from 'body-parser';
+import axios from 'axios';
 
 const telegram_url = `https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`;
-
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
-
+let passage:string;
 //app.use(bodyParser.json({limit: '10mb'}));
 //app.use(express.static('public'));
-function sendMessage(url, message, reply, res) {
-  //console.log(reply);
+function sendMessage(url:any, message:any, reply:string, res:any) {
    axios.post(url, { chat_id: message.chat.id,
         text: reply
-  }).then(response => {
+  }).then((response:any) => {
         console.log("Message posted");
       // return res.end("ok");
-    }).catch(error =>{
+    }).catch((error:any) =>{
         console.log(error);
-      //  return res.end();
     }); 
 };
 
-app.post('/' + process.env.API_KEY, (req, res) => {
-   var { message } = req.body;
-   
+app.post('/' + process.env.API_KEY, (req:any, res:any) => {
+   const { message } = req.body;
    let reply = "Hi, find your passage on the Bible...";
-   let passage;
    let myEditedMessage = message.text;
-   //console.log(myEditedMessage);
 
   if(myEditedMessage.toLowerCase().indexOf("/start") === 0 || 
     myEditedMessage.toLowerCase().indexOf("/help") === 0 ){
@@ -47,12 +41,11 @@ app.post('/' + process.env.API_KEY, (req, res) => {
   } else if(myEditedMessage.toLowerCase().indexOf("/newtestament") === 0){
      reply = "The new testament books are ";
     for(var item in NEWBOOKS){
-
       reply += NEWBOOKS[item] + " ";
     }
     sendMessage(telegram_url, message, reply, res);  
   } else if(myEditedMessage.toLowerCase().indexOf("/phrases") === 0){
-    passage = RANDOM_PASSAGES;
+    let passage = RANDOM_PASSAGES;
     let rnd = generateRandomPhrase(passage.length, null);
     var busca  = getHolyPassage(passage[rnd], reply);  
     busca.then(resp => {
@@ -67,8 +60,6 @@ app.post('/' + process.env.API_KEY, (req, res) => {
     const msg = myEditedMessage.toLowerCase().split(" ");
 
     let book;
-    //console.log(OLDBOOKS.map(bk => bk.toLowerCase()).includes(msg[1]) );
-    //console.log( NEWBOOKS.map(bk => bk.toLowerCase()).includes(msg[1]));
       if (msg.length == 4 && !isNaN(msg[2]) && !isNaN(msg[3]) && (OLDBOOKS.map(bk => bk.toLowerCase()).includes(msg[1]) ||
          NEWBOOKS.map(bk => bk.toLowerCase()).includes(msg[1]))) {
          book = msg[1].charAt(0).toUpperCase() + msg[1].slice(1);
@@ -94,21 +85,22 @@ app.post('/' + process.env.API_KEY, (req, res) => {
 
 let port = process.env.PORT || 3000;
 app.listen(port, () => console.log("Telegram bot is listening on port 3000"));
-const generateRandomPhrase = (max, exclude) => {
+const generateRandomPhrase = (max: number, exclude: number | null):number => {
   max = Math.ceil(max);
-  min = Math.floor(0);
+  let min = Math.floor(0);
   const rand = Math.floor(Math.random() * (max - min)) + min;
   if (rand === exclude){
-      return generateGuessNumber(min, max, exclude);
+      return generateRandomPhrase(max, exclude);
   } else {
       return rand;
   }
 }
 
-const getHolyPassage = async (passage,reply) => {
+const getHolyPassage = async (passage:string,reply:string) => {
  try {
-    await axios.get(`https://api.biblia.com/v1/bible/content/LEB.txt.txt?passage=${passage}&key=${process.env.BOOK_KEY}`).then(function (retorno) { 
-         if (!retorno.status==200) {
+    await axios.get(`https://api.biblia.com/v1/bible/content/LEB.txt.txt?passage=${passage}&key=${process.env.BOOK_KEY}`)
+      .then((retorno:any) => { 
+         if (retorno.status!==200) {
            reply = `Passage not found `;
          }else {
            reply = retorno.data + " " + passage ;
