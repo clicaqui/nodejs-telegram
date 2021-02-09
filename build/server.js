@@ -51,7 +51,6 @@ var passage;
 //app.use(bodyParser.json({limit: '10mb'}));
 //app.use(express.static('public'));
 function sendMessage(url, message, reply, res) {
-    //console.log(reply);
     axios_1.default.post(url, { chat_id: message.chat.id,
         text: reply
     }).then(function (response) {
@@ -59,7 +58,6 @@ function sendMessage(url, message, reply, res) {
         // return res.end("ok");
     }).catch(function (error) {
         console.log(error);
-        //  return res.end();
     });
 }
 ;
@@ -69,7 +67,7 @@ app.post('/' + process.env.API_KEY, function (req, res) {
     var myEditedMessage = message.text;
     if (myEditedMessage.toLowerCase().indexOf("/start") === 0 ||
         myEditedMessage.toLowerCase().indexOf("/help") === 0) {
-        reply = "To start type: '/find john 3 26' ";
+        reply = "To start type something like... '/find john 3 26' ";
         sendMessage(telegram_url, message, reply, res);
     }
     else if (myEditedMessage.toLowerCase().indexOf("/oldtestament") === 0) {

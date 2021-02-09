@@ -29,7 +29,7 @@ app.post('/' + process.env.API_KEY, (req:any, res:any) => {
 
   if(myEditedMessage.toLowerCase().indexOf("/start") === 0 || 
     myEditedMessage.toLowerCase().indexOf("/help") === 0 ){
-    reply = "To start type: '/find john 3 26' ";
+    reply = "To start type something like... '/find john 3 26' ";
     sendMessage(telegram_url, message, reply, res); 
   } else if(myEditedMessage.toLowerCase().indexOf("/oldtestament") === 0){
     reply = "The old testament books are ";
@@ -113,4 +113,4 @@ const getHolyPassage = async (passage:string,reply:string) => {
 }
 const OLDBOOKS = ["Genesis" , "Exodus", "Leviticus", "Numbers", "Deuteronomy", "Joshua", "Judges", "Samuel", "Kings", "Chronicles", "Nehemiah", "Job", "Psalm", "Proverbs", "Ecclesiastes", "Isaiah", "Jeremiah", "Ezekiel", "Daniel", "Hosea", "Joel", "Amos", "Jonah", "Naum","Micah", "Habakkuk", "Zephaniah", "Haggai", "Malachi"];
 const NEWBOOKS = ["Matthew", "Mark", "Luke", "John", "Acts", "Romans", "Corinthians", "Galatians", "Ephesians", "Philippians", "Colossians", "Thessalonians", "Timothy", "Titus", "Hebrews" , "James", "Peter", "Jude", "Revelation"];
-const RANDOM_PASSAGES = ["Daniel12.3","John1.1","Isaiah57.18"];
+const RANDOM_PASSAGES = ["Daniel12.3","John1.1","Isaiah57.18","Acts16.31"];
