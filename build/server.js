@@ -144,7 +144,7 @@ var getHolyPassage = function (passage, reply) { return __awaiter(void 0, void 0
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, axios_1.default.get("https://api.biblia.com/v1/bible/content/LEB.txt.txt?passage=" + passage + "&key=" + process.env.BOOK_KEY)
+                return [4 /*yield*/, axios_1.default.get("https://api.biblia.com/v1/bible/content/KJV.txt.txt?passage=" + passage + "&key=" + process.env.BOOK_KEY)
                         .then(function (retorno) {
                         if (retorno.status !== 200) {
                             reply = "Passage not found ";
