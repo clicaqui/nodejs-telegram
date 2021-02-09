@@ -2,6 +2,8 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import axios from 'axios';
+import { RANDOM_PASSAGES } from './random';
+
 
 const telegram_url = `https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`;
 const app = express();
@@ -113,4 +115,3 @@ const getHolyPassage = async (passage:string,reply:string) => {
 }
 const OLDBOOKS = ["Genesis" , "Exodus", "Leviticus", "Numbers", "Deuteronomy", "Joshua", "Judges", "Samuel", "Kings", "Chronicles", "Nehemiah", "Job", "Psalm", "Proverbs", "Ecclesiastes", "Isaiah", "Jeremiah", "Ezekiel", "Daniel", "Hosea", "Joel", "Amos", "Jonah", "Naum","Micah", "Habakkuk", "Zephaniah", "Haggai", "Malachi"];
 const NEWBOOKS = ["Matthew", "Mark", "Luke", "John", "Acts", "Romans", "Corinthians", "Galatians", "Ephesians", "Philippians", "Colossians", "Thessalonians", "Timothy", "Titus", "Hebrews" , "James", "Peter", "Jude", "Revelation"];
-const RANDOM_PASSAGES = ["1Chronicles29.5","1Corinthians8.9","John1.1","John5.12","John11.26","1John3.18","Romans5.10","Isaiah26.4","Isaiah57.18","Acts16.31","Psalm1.6","Psalm27.14","Psalm72.4","Luke21.32","Luke22.26","Psalm6.9","Psalm23.4","Deuteronomy31.6","Proverbs1.10","Revelation3.19"];

@@ -43,6 +43,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 var body_parser_1 = __importDefault(require("body-parser"));
 var axios_1 = __importDefault(require("axios"));
+var random_1 = require("./random");
 var telegram_url = "https://api.telegram.org/bot" + process.env.API_KEY + "/sendMessage";
 var app = express_1.default();
 app.use(body_parser_1.default.urlencoded({ extended: true }));
@@ -86,7 +87,7 @@ app.post('/' + process.env.API_KEY, function (req, res) {
         sendMessage(telegram_url, message, reply, res);
     }
     else if (myEditedMessage.toLowerCase().indexOf("/phrases") === 0) {
-        var passage_1 = RANDOM_PASSAGES;
+        var passage_1 = random_1.RANDOM_PASSAGES;
         var rnd = generateRandomPhrase(passage_1.length, null);
         var busca = getHolyPassage(passage_1[rnd], reply);
         busca.then(function (resp) {
@@ -165,4 +166,3 @@ var getHolyPassage = function (passage, reply) { return __awaiter(void 0, void 0
 }); };
 var OLDBOOKS = ["Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy", "Joshua", "Judges", "Samuel", "Kings", "Chronicles", "Nehemiah", "Job", "Psalm", "Proverbs", "Ecclesiastes", "Isaiah", "Jeremiah", "Ezekiel", "Daniel", "Hosea", "Joel", "Amos", "Jonah", "Naum", "Micah", "Habakkuk", "Zephaniah", "Haggai", "Malachi"];
 var NEWBOOKS = ["Matthew", "Mark", "Luke", "John", "Acts", "Romans", "Corinthians", "Galatians", "Ephesians", "Philippians", "Colossians", "Thessalonians", "Timothy", "Titus", "Hebrews", "James", "Peter", "Jude", "Revelation"];
-var RANDOM_PASSAGES = ["1Chronicles29.5", "1Corinthians8.9", "John1.1", "John5.12", "John11.26", "1John3.18", "Romans5.10", "Isaiah26.4", "Isaiah57.18", "Acts16.31", "Psalm1.6", "Psalm27.14", "Psalm72.4", "Luke21.32", "Luke22.26", "Psalm6.9", "Psalm23.4", "Deuteronomy31.6", "Proverbs1.10", "Revelation3.19"];
