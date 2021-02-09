@@ -100,7 +100,7 @@ const generateRandomPhrase = (max: number, exclude: number | null):number => {
 
 const getHolyPassage = async (passage:string,reply:string) => {
  try {
-    await axios.get(`https://api.biblia.com/v1/bible/content/LEB.txt.txt?passage=${passage}&key=${process.env.BOOK_KEY}`)
+    await axios.get(`https://api.biblia.com/v1/bible/content/KJV.txt.txt?passage=${passage}&key=${process.env.BOOK_KEY}`)
       .then((retorno:any) => { 
          if (retorno.status!==200) {
            reply = `Passage not found `;
