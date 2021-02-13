@@ -29,7 +29,8 @@ class ServerSetup extends core_1.Server {
         return this.app;
     }
     start() {
-        this.app.listen(this.port || process.env.PORT, () => {
+        this.port = process.env.PORT;
+        this.app.listen(this.port, () => {
             console.info('Servidor ouvindo na porta', this.port);
         });
     }
