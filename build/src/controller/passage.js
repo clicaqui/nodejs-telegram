@@ -151,7 +151,7 @@ let PassageControler = class PassageControler {
             const response = await passageService.findPassage(this.passage, reply);
             reply = response;
         }
-        else if (myEditedMessage.indexOf('/find') !== -1) {
+        else if (myEditedMessage.indexOf('/find') !== -1 || myEditedMessage.indexOf('/encontre') !== -1) {
             const msg = myEditedMessage.split(' ');
             let book;
             if (msg.length == 4 &&
