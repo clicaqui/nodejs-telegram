@@ -6,7 +6,7 @@
   "author": "Daniel Bastos",
   "license": "MIT",
   "scripts": {
-    "mbuild": "tsc --project ./",
+    "build": "tsc --project ./",
     "start": "node ./build/src/server.js",
     "start:dev": "ts-node-dev src/server.ts",
     "test:inte": "NODE_ENV=test jest --projects ./test --runInBand",
