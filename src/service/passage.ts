@@ -16,7 +16,7 @@ export class PassageService {
         try {
             await this.request
             .get(
-              `http://api.biblia.com/v1/bible/content/KJV.txt.txt?passage=${book}&key=${process.env.BOOK_KEY}`
+              `https://api.biblia.com/v1/bible/content/KJV.txt.txt?passage=${book}&key=${process.env.BOOK_KEY}`
             )
             .then((retorno: any) => {
               if (retorno.status !== 200) {
