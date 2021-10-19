@@ -15,7 +15,7 @@ class PassageService {
     async findPassage(book, mensagem) {
         try {
             await this.request
-                .get(`http://api.biblia.com/v1/bible/content/KJV.txt.txt?passage=${book}&key=${process.env.BOOK_KEY}`)
+                .get(`https://api.biblia.com/v1/bible/content/KJV.txt.txt?passage=${book}&key=${process.env.BOOK_KEY}`)
                 .then((retorno) => {
                 if (retorno.status !== 200) {
                     mensagem = `Passage not found `;

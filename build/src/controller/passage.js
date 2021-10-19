@@ -180,8 +180,7 @@ let PassageControler = class PassageControler {
                 reply = 'Book informed not exist!';
             }
         }
-        await service.send(message, reply);
-        res.end();
+        res.json(reply);
     }
 };
 __decorate([

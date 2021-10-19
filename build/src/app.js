@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ServerSetup = void 0;
 require("./util/module-alias");
+require("./util/config");
 const core_1 = require("@overnightjs/core");
 const body_parser_1 = __importDefault(require("body-parser"));
 const passage_1 = require("./controller/passage");
@@ -29,7 +30,7 @@ class ServerSetup extends core_1.Server {
         return this.app;
     }
     start() {
-        this.port = process.env.PORT;
+        this.port = process.env.PORT ? process.env.PORT : this.port;
         this.app.listen(this.port, () => {
             console.info('Servidor ouvindo na porta', this.port);
         });
