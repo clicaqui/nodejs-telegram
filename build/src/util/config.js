@@ -38,7 +38,7 @@ var __importStar =
   };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BOOK_KEY = exports.APP_KEY = void 0;
-scrollTo;
+
 exports.APP_KEY = process.env.APP_KEY;
 exports.BOOK_KEY = process.env.BOOK_KEY;
 //# sourceMappingURL=config.js.map
