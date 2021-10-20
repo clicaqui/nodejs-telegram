@@ -108,9 +108,7 @@ let PassageControler = class PassageControler {
             let book;
             if (msg.length == 4 &&
                 !isNaN(msg[2]) &&
-                !isNaN(msg[3]) &&
-                (OLDBOOKS.map((bk) => bk[0].toString().toLowerCase() || bk[1].toString().toLowerCase()).includes(msg[1]) ||
-                    NEWBOOKS.map((bk) => bk[0].toString().toLowerCase() || bk[1].toString().toLowerCase()).includes(msg[1]))) {
+                !isNaN(msg[3])) {
                 book = OLDBOOKS.find((bk) => {
                     if (bk[0] == msg[1].charAt(0).toUpperCase() + msg[1].slice(1) ||
                         bk[1] == msg[1].charAt(0).toUpperCase() + msg[1].slice(1))
@@ -121,9 +119,7 @@ let PassageControler = class PassageControler {
             else if (msg.length == 5 &&
                 !isNaN(msg[1]) &&
                 !isNaN(msg[3]) &&
-                !isNaN(msg[4]) &&
-                (OLDBOOKS.map((bk) => bk[0].toString().toLowerCase() || bk[1].toString().toLowerCase()).includes(msg[2]) ||
-                    NEWBOOKS.map((bk) => bk[0].toString().toLowerCase() || bk[1].toString().toLowerCase()).includes(msg[2]))) {
+                !isNaN(msg[4])) {
                 book = OLDBOOKS.find((bk) => {
                     if (bk[0] == msg[2].charAt(0).toUpperCase() + msg[2].slice(1) ||
                         bk[1] == msg[2].charAt(0).toUpperCase() + msg[2].slice(1))
@@ -132,7 +128,7 @@ let PassageControler = class PassageControler {
                 this.passage = msg[1] + book + msg[3] + '.' + msg[4];
             }
             if (book) {
-                console.log(book);
+                console.info(book);
                 const passageService = new passage_1.PassageService(axios_1.default);
                 const response = await passageService.findPassage(this.passage, reply);
                 reply = response;
