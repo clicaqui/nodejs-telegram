@@ -38,20 +38,8 @@ var __importStar =
   };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BOOK_KEY = exports.APP_KEY = void 0;
-/*const dotenv = __importStar(require("dotenv"));
-dotenv.config();
-let path;
-switch (process.env.NODE_ENV) {
-    case "test":
-        path = `${__dirname}/../../env/.env.test`;
-        break;
-    case "production":
-        path = `${__dirname}/../../env/.env.production`;
-        break;
-    default:
-        path = `${__dirname}/../../env/.env.development`;
-}
-dotenv.config({ path: path });*/
+const dotenv = __importStar(require("dotenv"));
+
 exports.APP_KEY = process.env.APP_KEY;
 exports.BOOK_KEY = process.env.BOOK_KEY;
 //# sourceMappingURL=config.js.map
