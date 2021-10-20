@@ -19,7 +19,7 @@ const axios_1 = __importDefault(require("axios"));
 const passage_1 = require("../service/passage");
 const message_1 = require("@src/service/message");
 const oldbooks_1 = require("../util/oldbooks");
-const newbooks_1 = require("../util/newbooks");
+const newbooks_1 = require("@src/util/newbooks");
 let PassageControler = class PassageControler {
     constructor(passage) {
         this.passage = passage;
@@ -144,7 +144,7 @@ let PassageControler = class PassageControler {
     }
 };
 __decorate([
-    core_1.Post(``),
+    core_1.Post(`${process.env.API_KEY}`),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
