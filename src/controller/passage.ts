@@ -3,6 +3,8 @@ import express from 'express';
 import axios from 'axios';
 import { PassageService } from '../service/passage';
 import { MessageService } from '@src/service/message';
+import { OldBooks } from '../util/oldbooks';
+import { NewBooks } from '../util/newbooks';
 
 @Controller('')
 export class PassageControler {
@@ -57,60 +59,10 @@ export class PassageControler {
     const rand = Math.floor(Math.random() * (max - min)) + min;
     return rand;
   };
-  @Post(`${process.env.API_KEY}`)
+  @Post(``)
   public async getActionPassage(req: express.Request, res: express.Response): Promise<void> {
-    const OLDBOOKS = [
-      'Genesis',
-      'Exodus',
-      'Leviticus',
-      'Numbers',
-      'Deuteronomy',
-      'Joshua',
-      'Judges',
-      'Samuel',
-      'Kings',
-      'Chronicles',
-      'Nehemiah',
-      'Job',
-      'Psalm',
-      'Proverbs',
-      'Ecclesiastes',
-      'Isaiah',
-      'Jeremiah',
-      'Ezekiel',
-      'Daniel',
-      'Hosea',
-      'Joel',
-      'Amos',
-      'Jonah',
-      'Naum',
-      'Micah',
-      'Habakkuk',
-      'Zephaniah',
-      'Haggai',
-      'Malachi',
-    ];
-    const NEWBOOKS = [
-      'Matthew',
-      'Mark',
-      'Luke',
-      'John',
-      'Acts',
-      'Romans',
-      'Corinthians',
-      'Galatians',
-      'Ephesians',
-      'Philippians',
-      'Colossians',
-      'Thessalonians',
-      'Timothy',
-      'Titus',
-      'Hebrews',
-      'James',
-      'Peter',
-      'Jude',
-      'Revelation',
-    ];
+    const OLDBOOKS = Object.entries(OldBooks);
+    const NEWBOOKS = Object.entries(NewBooks)
     
 
     let reply = 'Hi, find your passage on the Bible...';
@@ -140,28 +92,40 @@ export class PassageControler {
       const passageService = new PassageService(axios);
       const response = await passageService.findPassage(this.passage, reply);
       reply = response;
-    } else if (myEditedMessage.indexOf('/find') !== -1) {
+    } else if (myEditedMessage.indexOf('/find') !== -1 || myEditedMessage.indexOf('/encontre') !== -1 ) {
       const msg = myEditedMessage.split(' ');
 
-      let book;
+      let book ;
+      
       if (
         msg.length == 4 &&
         !isNaN(msg[2]) &&
         !isNaN(msg[3]) &&
-        (OLDBOOKS.map((bk) => bk.toLowerCase()).includes(msg[1]) ||
-          NEWBOOKS.map((bk) => bk.toLowerCase()).includes(msg[1]))
+        (OLDBOOKS.map((bk) => bk.toString().toLowerCase()).includes(msg[1]) ||
+          NEWBOOKS.map((bk) => bk.toString().toLowerCase()).includes(msg[1]))
       ) {
-        book = msg[1].charAt(0).toUpperCase() + msg[1].slice(1);
+
+         book = OLDBOOKS.map((bk) => {
+         if(bk[0] == msg[1].charAt(0).toUpperCase() + msg[1].slice(1) ||
+          bk[1] == msg[1].charAt(0).toUpperCase() + msg[1].slice(1))
+          bk[0];
+         });
+
+        //book = msg[1].charAt(0).toUpperCase() + msg[1].slice(1);
         this.passage = book + msg[2] + '.' + msg[3];
       } else if (
         msg.length == 5 &&
         !isNaN(msg[1]) &&
         !isNaN(msg[3]) &&
         !isNaN(msg[4]) &&
-        (OLDBOOKS.map((bk) => bk.toLowerCase()).includes(msg[2]) ||
-          NEWBOOKS.map((bk) => bk.toLowerCase()).includes(msg[2]))
+        (OLDBOOKS.map((bk) => bk.toString().toLowerCase()).includes(msg[2]) ||
+          NEWBOOKS.map((bk) => bk.toString().toLowerCase()).includes(msg[2]))
       ) {
-        book = msg[2].charAt(0).toUpperCase() + msg[2].slice(1);
+        book = OLDBOOKS.map((bk) => {
+          if(bk[0] == msg[2].charAt(0).toUpperCase() + msg[2].slice(1) ||
+           bk[1] == msg[2].charAt(0).toUpperCase() + msg[2].slice(1))
+           bk[0];
+          });
         this.passage = msg[1] + book + msg[3] + '.' + msg[4];
       }
       if (book) {
