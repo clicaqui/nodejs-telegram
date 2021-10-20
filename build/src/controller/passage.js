@@ -111,7 +111,7 @@ let PassageControler = class PassageControler {
                 !isNaN(msg[3]) &&
                 (OLDBOOKS.map((bk) => bk[0].toString().toLowerCase() || bk[1].toString().toLowerCase()).includes(msg[1]) ||
                     NEWBOOKS.map((bk) => bk[0].toString().toLowerCase() || bk[1].toString().toLowerCase()).includes(msg[1]))) {
-                book = OLDBOOKS.map((bk) => {
+                book = OLDBOOKS.find((bk) => {
                     if (bk[0] == msg[1].charAt(0).toUpperCase() + msg[1].slice(1) ||
                         bk[1] == msg[1].charAt(0).toUpperCase() + msg[1].slice(1))
                         bk[0];
@@ -124,7 +124,7 @@ let PassageControler = class PassageControler {
                 !isNaN(msg[4]) &&
                 (OLDBOOKS.map((bk) => bk[0].toString().toLowerCase() || bk[1].toString().toLowerCase()).includes(msg[2]) ||
                     NEWBOOKS.map((bk) => bk[0].toString().toLowerCase() || bk[1].toString().toLowerCase()).includes(msg[2]))) {
-                book = OLDBOOKS.map((bk) => {
+                book = OLDBOOKS.find((bk) => {
                     if (bk[0] == msg[2].charAt(0).toUpperCase() + msg[2].slice(1) ||
                         bk[1] == msg[2].charAt(0).toUpperCase() + msg[2].slice(1))
                         bk[0];
