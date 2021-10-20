@@ -132,6 +132,7 @@ let PassageControler = class PassageControler {
                 this.passage = msg[1] + book + msg[3] + '.' + msg[4];
             }
             if (book) {
+                console.log(book);
                 const passageService = new passage_1.PassageService(axios_1.default);
                 const response = await passageService.findPassage(this.passage, reply);
                 reply = response;
