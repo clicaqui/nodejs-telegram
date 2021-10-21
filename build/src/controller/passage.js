@@ -126,11 +126,11 @@ let PassageControler = class PassageControler {
                 !isNaN(msg[4])) {
                 book = undefined;
                 book = OLDBOOKS.find((bk) => {
-                    return (bk[0] == msg[2].charAt(0).toUpperCase() || bk[1] == msg[2].charAt(0).toUpperCase());
+                    return (bk[0] == msg[2].charAt(0).toUpperCase() + msg[2].slice(1) || bk[1] == msg[2].charAt(0).toUpperCase() + msg[2].slice(1));
                 });
                 if (!book) {
                     book = NEWBOOKS.find((bk) => {
-                        return (bk[0] == msg[2].charAt(0).toUpperCase() || bk[1] == msg[2].charAt(0).toUpperCase());
+                        return (bk[0] == msg[2].charAt(0).toUpperCase() + msg[2].slice(1) || bk[1] == msg[2].charAt(0).toUpperCase() + msg[2].slice(1));
                     });
                 }
                 this.passage = msg[1] + book[0] + msg[3] + '.' + msg[4];
