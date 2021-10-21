@@ -76,7 +76,6 @@ let PassageControler = class PassageControler {
         const OLDBOOKS = Object.entries(oldbooks_1.OldBooks);
         const NEWBOOKS = Object.entries(newbooks_1.NewBooks);
         let reply = 'Hi, find your passage on the Bible...';
-        let book;
         const { message } = req.body;
         const myEditedMessage = message.text.toLowerCase();
         const service = new message_1.MessageService(axios_1.default);
@@ -106,9 +105,11 @@ let PassageControler = class PassageControler {
         }
         else if (myEditedMessage.indexOf('/find') !== -1 || myEditedMessage.indexOf('/encontre') !== -1) {
             const msg = myEditedMessage.split(' ');
+            let book;
             if (msg.length == 4 &&
                 !isNaN(msg[2]) &&
                 !isNaN(msg[3])) {
+                book = undefined;
                 book = OLDBOOKS.find((bk) => {
                     return (bk[0] == msg[1].charAt(0).toUpperCase() + msg[1].slice(1) || bk[1] == msg[1].charAt(0).toUpperCase() + msg[1].slice(1));
                 });
@@ -123,6 +124,7 @@ let PassageControler = class PassageControler {
                 !isNaN(msg[1]) &&
                 !isNaN(msg[3]) &&
                 !isNaN(msg[4])) {
+                book = undefined;
                 book = OLDBOOKS.find((bk) => {
                     return (bk[0] == msg[2].charAt(0).toUpperCase() || bk[1] == msg[2].charAt(0).toUpperCase());
                 });
