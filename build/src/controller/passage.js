@@ -76,6 +76,7 @@ let PassageControler = class PassageControler {
         const OLDBOOKS = Object.entries(oldbooks_1.OldBooks);
         const NEWBOOKS = Object.entries(newbooks_1.NewBooks);
         let reply = 'Hi, find your passage on the Bible...';
+        let book;
         const { message } = req.body;
         const myEditedMessage = message.text.toLowerCase();
         const service = new message_1.MessageService(axios_1.default);
@@ -105,7 +106,6 @@ let PassageControler = class PassageControler {
         }
         else if (myEditedMessage.indexOf('/find') !== -1 || myEditedMessage.indexOf('/encontre') !== -1) {
             const msg = myEditedMessage.split(' ');
-            let book;
             if (msg.length == 4 &&
                 !isNaN(msg[2]) &&
                 !isNaN(msg[3])) {
