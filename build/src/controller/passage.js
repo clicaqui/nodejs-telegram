@@ -146,7 +146,7 @@ let PassageControler = class PassageControler {
     }
 };
 __decorate([
-    core_1.Post(""),
+    core_1.Post(`${process.env.API_KEY}`),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
