@@ -110,21 +110,30 @@ let PassageControler = class PassageControler {
                 !isNaN(msg[2]) &&
                 !isNaN(msg[3])) {
                 book = OLDBOOKS.find((bk) => {
-                    bk[0] == msg[1] || bk[1] == msg[1];
+                    return (bk[0] == msg[1].charAt(0).toUpperCase() + msg[1].slice(1) || bk[1] == msg[1].charAt(0).toUpperCase() + msg[1].slice(1));
                 });
-                this.passage = book + msg[2] + '.' + msg[3];
+                if (!book) {
+                    book = NEWBOOKS.find((bk) => {
+                        return (bk[0] == msg[1].charAt(0).toUpperCase() + msg[1].slice(1) || bk[1] == msg[1].charAt(0).toUpperCase() + msg[1].slice(1));
+                    });
+                }
+                this.passage = book[0] + msg[2] + '.' + msg[3];
             }
             else if (msg.length == 5 &&
                 !isNaN(msg[1]) &&
                 !isNaN(msg[3]) &&
                 !isNaN(msg[4])) {
                 book = OLDBOOKS.find((bk) => {
-                    bk[0] == msg[2] || bk[1] == msg[2];
+                    return (bk[0] == msg[2].charAt(0).toUpperCase() || bk[1] == msg[2].charAt(0).toUpperCase());
                 });
-                this.passage = msg[1] + book + msg[3] + '.' + msg[4];
+                if (!book) {
+                    book = NEWBOOKS.find((bk) => {
+                        return (bk[0] == msg[2].charAt(0).toUpperCase() || bk[1] == msg[2].charAt(0).toUpperCase());
+                    });
+                }
+                this.passage = msg[1] + book[0] + msg[3] + '.' + msg[4];
             }
             if (book) {
-                console.info(book);
                 const passageService = new passage_1.PassageService(axios_1.default);
                 const response = await passageService.findPassage(this.passage, reply);
                 reply = response;
@@ -137,7 +146,7 @@ let PassageControler = class PassageControler {
     }
 };
 __decorate([
-    core_1.Post(`${process.env.API_KEY}`),
+    core_1.Post(""),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)

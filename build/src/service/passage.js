@@ -13,6 +13,7 @@ class PassageService {
         this.request = request;
     }
     async findPassage(book, mensagem) {
+        console.log(book);
         try {
             await this.request
                 .get(`https://api.biblia.com/v1/bible/content/KJV.txt.txt?passage=${book}&key=${process.env.BOOK_KEY}`)
