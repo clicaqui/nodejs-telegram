@@ -109,10 +109,9 @@ let PassageControler = class PassageControler {
             if (msg.length == 4 &&
                 !isNaN(msg[2]) &&
                 !isNaN(msg[3])) {
-                book = OLDBOOKS.find((bk, rk) => {
-                    if (bk == msg[1].charAt(0).toUpperCase() + msg[1].slice(1) ||
-                        rk == msg[1].charAt(0).toUpperCase() + msg[1].slice(1))
-                        bk;
+                book = OLDBOOKS.find((bk, i) => {
+                    bk == msg[1].charAt(0).toUpperCase() + msg[1].slice(1) ||
+                        bk[i] == msg[1].charAt(0).toUpperCase() + msg[1].slice(1);
                 });
                 this.passage = book + msg[2] + '.' + msg[3];
             }
@@ -120,10 +119,9 @@ let PassageControler = class PassageControler {
                 !isNaN(msg[1]) &&
                 !isNaN(msg[3]) &&
                 !isNaN(msg[4])) {
-                book = OLDBOOKS.find((bk, rk) => {
-                    if (bk == msg[2].charAt(0).toUpperCase() + msg[2].slice(1) ||
-                        rk == msg[2].charAt(0).toUpperCase() + msg[2].slice(1))
-                        bk;
+                book = OLDBOOKS.find((bk, i) => {
+                    bk == msg[2].charAt(0).toUpperCase() + msg[2].slice(1) ||
+                        bk[i] == msg[2].charAt(0).toUpperCase() + msg[2].slice(1);
                 });
                 this.passage = msg[1] + book + msg[3] + '.' + msg[4];
             }
