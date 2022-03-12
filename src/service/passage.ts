@@ -11,24 +11,21 @@ export class ServiceError extends Error{
 export class PassageService {
     constructor(protected request: AxiosStatic) {}
 
-    public async findPassage(book:string, mensagem:string) {
-       
+    public async findPassage(book:string, mensagem:string) : Promise<String>{
+
         try {
-            await this.request
+            const response = await this.request
             .get(
               `https://api.biblia.com/v1/bible/content/KJV.txt.txt?passage=${book}&key=${process.env.BOOK_KEY}`
-            )
-            .then((retorno: any) => {
-              if (retorno.status !== 200) {
-                mensagem = `Passage not found `;
-              } else {
-                mensagem = retorno.data + ' ' + book.replace('.',':');
-              }
-            });
+            );
+            if (response.status !== 200){
+              throw new Error(`Passage not found `);
+            } else {
+              return response.data + " " + book.replace('.',':');
+            }
             
-        } catch (error) {
-            throw new ServiceError(error.message);
+        } catch (error:any) {
+            return `Passage not found `;
         }
-        return mensagem;
     }
 }

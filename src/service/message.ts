@@ -15,7 +15,7 @@ export class MessageService {
         `https://api.telegram.org/bot${process.env.API_KEY}/sendMessage`,
         { chat_id: message.chat.id, text: reply }
       )
-      .then(() => {
+      .then((res) => {
         console.log('Message posted');
       })
       .catch((error) => {

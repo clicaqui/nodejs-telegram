@@ -6,18 +6,20 @@ export class BookService {
 
     public async findBook(book:string) {
        
-        //try {
+        try {
            const retorno = await this.request
             .get(
               `http://findholybible-default-rtdb.firebaseio.com/${book}.json`
             )
-            //.then((retorno: any) => {
-            //  if (retorno.status !== 200) {
-            //     return `Passage not found `;
-            //  } 
-            //   return retorno.data;
-            //});
-            return retorno.data;
-       // return books;
+            if (retorno.status == 200) {
+              return retorno.data;
+            } else {
+              throw new Error("Passage not found")
+            }
+
+        } catch(err:any) {
+          return err.message;
+        }  
+
     }
 }
