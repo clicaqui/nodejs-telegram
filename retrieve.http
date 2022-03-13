@@ -1,0 +1,27 @@
+POST http://localhost:3000/1699907693:AAEwhVX75RzrSvy8f0tkbphor2cFRXW2lnM/
+Content-Type: application/json
+
+{
+    "message": {
+        "text": "/start"
+    }
+}
+###
+POST http://localhost:3000/1699907693:AAEwhVX75RzrSvy8f0tkbphor2cFRXW2lnM/
+Content-Type: application/json
+
+{
+    "message": {
+        "chat": { "id": "1067356804"},
+        "text": "/find John 1 1"
+    }
+}
+###
+POST http://localhost:3000/1699907693:AAEwhVX75RzrSvy8f0tkbphor2cFRXW2lnM/
+Content-Type: application/json
+
+{
+    "message": {
+        "text": "/find John 0 1"
+    }
+}
