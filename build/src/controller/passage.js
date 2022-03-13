@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var _a, _b;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PassageControler = void 0;
 const core_1 = require("@overnightjs/core");
@@ -112,7 +111,7 @@ let PassageControler = class PassageControler {
 __decorate([
     core_1.Post(`${process.env.API_KEY}`),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [typeof (_a = typeof express_1.default !== "undefined" && express_1.default.Request) === "function" ? _a : Object, typeof (_b = typeof express_1.default !== "undefined" && express_1.default.Response) === "function" ? _b : Object]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], PassageControler.prototype, "getActionPassage", null);
 PassageControler = __decorate([
