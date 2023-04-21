@@ -14,21 +14,18 @@ class PassageService {
     }
     async findPassage(book, mensagem) {
         try {
-            await this.request
-                .get(`https://api.biblia.com/v1/bible/content/KJV.txt.txt?passage=${book}&key=${process.env.BOOK_KEY}`)
-                .then((retorno) => {
-                if (retorno.status !== 200) {
-                    mensagem = `Passage not found `;
-                }
-                else {
-                    mensagem = retorno.data + ' ' + book.replace('.', ':');
-                }
-            });
+            const response = await this.request
+                .get(`https://api.biblia.com/v1/bible/content/KJV.txt.txt?passage=${book}&key=${process.env.BOOK_KEY}`);
+            if (response.status !== 200) {
+                throw new Error(`Passage not found `);
+            }
+            else {
+                return response.data + " " + book.replace('.', ':');
+            }
         }
         catch (error) {
-            throw new ServiceError(error.message);
+            return `Passage not found `;
         }
-        return mensagem;
     }
 }
 exports.PassageService = PassageService;

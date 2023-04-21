@@ -7,6 +7,7 @@ export interface MessageType  {
     }
 }
 
+
 export class MessageService {
   constructor(protected request: AxiosStatic) {}
   public async send(message: MessageType, reply: string):Promise<void> {
