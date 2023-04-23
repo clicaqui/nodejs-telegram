@@ -5,6 +5,9 @@
   "main": "server.ts",
   "author": "Daniel Bastos",
   "license": "MIT",
+  "engines": {
+    "npm": "9.6.5"
+  },
   "scripts": {
     "mbuild": "tsc --project ./",
     "start": "node ./build/src/server.js",
