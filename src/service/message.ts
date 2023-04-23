@@ -1,5 +1,6 @@
 import { AxiosStatic } from 'axios';
 
+
 export interface MessageType  {
     text: string,
     chat: {
