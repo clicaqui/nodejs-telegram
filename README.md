@@ -5,4 +5,4 @@
 
 <p>Uma API REST é consumida para atender as requisições realizadas no bot Telegram.</p>
 
-<p>Serviço de translação de textos do IBM Watson é utilizado, para isso o Red-Node é configurado para atender essa funcionalidade capturando as requisições e traduzindos os textos buscados.</p>
+<p>Serviço de translação de textos do IBM Watson é utilizado, para isso o Node-Red é configurado para atender essa funcionalidade capturando as requisições e traduzindos os textos buscados.</p>
